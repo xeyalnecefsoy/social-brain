@@ -25,10 +25,10 @@ export function useTopics(initialData: Topic[]) {
       try {
         setLoading(true);
         // "Topic" table will be created automatically if it doesn't exist
-        const result = await Backendless.Data.of('Topic').find<Topic>({
-          pageSize: 100,
-          sortBy: ['created DESC']
-        });
+          const result = await Backendless.Data.of('Topic').find({
+            pageSize: 100,
+            sortBy: ['created DESC']
+          }) as Topic[];
         
         if (isMounted) {
             const mapped = result.map(item => ({
