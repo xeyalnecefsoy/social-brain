@@ -180,10 +180,10 @@ export default function Home() {
       <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-400">
-               <Lightbulb className="h-5 w-5" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30">
+               <Brain className="h-6 w-6" />
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-100">
+            <h1 className="text-xl font-bold tracking-tight text-white">
               Social Brain
             </h1>
           </div>

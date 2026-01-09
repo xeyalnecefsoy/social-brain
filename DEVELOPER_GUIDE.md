@@ -1,0 +1,34 @@
+# Social Brain - Developer Guide & Lessons Learned
+
+Bu fayl layihə üzərində işləyərkən qarşılaşılan texniki çətinlikləri və onların həll yollarını sənədləşdirmək üçün yaradılıb. Gələcək inkişaf mərhələlərində bu qeydləri nəzərə almaq vaxt itkisinin qarşısını alacaq.
+
+## 1. Backendless və SSR Problemləri
+**Problem:** `backendless` SDK-sı birbaşa import ediləndə Next.js-in Server-Side Rendering (SSR) mərhələsində `self is not defined` və ya `window is not defined` xətaları verir.
+**Həll:**
+- `lib/backendless.ts` faylında xüsusi yoxlama (`typeof window === 'undefined'`) qurulb.
+- Server tərəfində boş "mock" obyekt qaytarılır.
+- Real Backendless kitabxanası yalnız müştəri tərəfində (client-side) yüklənir.
+- **Qayda:** Backendless funksiyalarını (məs: `Backendless.Data.of(...)`) heç vaxt birbaşa komponentin gövdəsində çağırmayın, yalnız `useEffect` və ya hadisə (onClick) daxilində istifadə edin.
+
+## 2. Turbopack Uyğunsuzluğu
+**Problem:** `npm run dev --turbopack` istifadə edərkən bəzi köhnə modul formatları ilə uyğunsuzluq yaranır və tətbiq çökür.
+**Həll:**
+- `package.json` faylında dev skripti sadəcə `next dev` olaraq saxlanılıb.
+- **Qayda:** Turbopack-i hələlik aktivləşdirməyin.
+
+## 3. Terminal və Git Əmrləri (Agent/Windows)
+**Problem:** Windows PowerShell mühitində zəncirvari əmrlər (`git add . && git commit...`) bəzən düzgün işləmir və ya xəta verəndə proses dayanmır.
+**Həll:**
+- Git əmrlərini **bir-bir** və **ardıcıl** icra etmək ən etibarlı yoldur.
+- Eyni anda push, commit və remote əlavə etməyə çalışmayın.
+
+## 4. UI/UX "Gotchas" (Diqqət edilməli məqamlar)
+- **Mətn Formatlama:** Tətbiqdəki təsvirlər (description) sadə `string` kimi saxlanılır. `**qalın**` və ya `*kursiv*` yazıları render etmək üçün React daxilində xüsusi `split/map` funksiyası yazılıb. Sadəcə mətni ekrana basmaq (rendering text directly) formatı pozacaq.
+- **SOS Düyməsi:** `fixed` mövqedədir (`z-index: 100`). Mobil versiyada "Mövzu Əlavə Et" düyməsi ilə toqquşmaması üçün yeri `left-6` (sol tərəf) olaraq təyin edilib.
+- **Aktiv Xatırlama (Shuffle):** Əgər istifadəçinin öz qeydləri yoxdursa, düymə sönməməli, əvəzində `INSPIRATION_TOPICS` (hazır faktlar) bazasından istifadə etməlidir.
+
+## 5. İkonlar və Dizayn
+- Kateqoriyalar üçün `lucide-react` ikonları (Atom, History, Tent və s.) xüsusi `Record` obyektində saxlanılır. Yeni kateqoriya əlavə edərkən bu siyahıya ikon əlavə etməyi unutmayın.
+
+---
+*Son Yenilənmə: 10 Yanvar 2026*
