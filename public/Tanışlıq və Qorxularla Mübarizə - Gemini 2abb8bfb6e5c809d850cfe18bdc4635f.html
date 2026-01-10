@@ -1,0 +1,720 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tanışlıq və Qorxularla Mübarizə - Gemini</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2abb8bfb-6e5c-809d-850c-fe18bdc4635f" class="page sans"><header><h1 class="page-title" dir="auto">Tanışlıq və Qorxularla Mübarizə - Gemini</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-803d-bcaf-d9eb530b07af" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80db-8b43-faddebc57656" class="">Şəhərdə gəzərkən qəşəng, seksi, cəlbedici qızlar, qadınlar görürəm. Ancaq yaxınlaşmaq, danışmaq və bənzər heç bir şey etmirəm. Bu özümü limitləməyim (qız boş şeydir, işlərinə fokuslan, onlar sənin başını qatacaq day da, mesajlaşmaq məcburiyyəti zad yaranacaq sənin vaxtını sömürəcək), ətrafdakı başqa insanlardan çəkinərək yaxınlaşa bilməməyim, qızın məni bəyənməyəcəyi kimi düşüncələr və sair səbəbindən alınmır.<br/>Flirt edib qızla əlaqə yaratmaq, qeyri-ciddi formada münasibət davam etdirib seksual ehtiyaclarımı bir qədər ödəmək istəyirəm əsasən.<br/>Düşüncə və tövsiyələrin?</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-800d-a5df-e272f8a0e663" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-807b-9e6d-cc2832056a9a" class="">Bu vəziyyət bir çox gənc oğlanın yaşadığı daxili münaqişədir: bir tərəfdən bioloji və sosial ehtiyaclar, digər tərəfdən isə uğursuzluq qorxusu və &quot;vaxt itkisi&quot; kimi görünən müdafiə mexanizmləri. Səmimiyyətin üçün təşəkkürlər.</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8058-85da-f0f8fb7760ec" class="">Gəlin bu məsələni bir neçə realistik hissəyə bölək:</p></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80be-aeec-f082c368585b" class="">1. Müdafiə Mexanizmlərini Tanımaq</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80dd-95cd-f81618e90e37" class="">Sənin &quot;qız boş şeydir, vaxtımı alacaq, işlərimə mane olacaq&quot; düşüncən çox vaxt beyninin səni <strong>rədd edilmək qorxusundan</strong> qorumaq üçün uydurduğu bir bəhanədir. Buna &quot;rasionallaşdırma&quot; deyilir.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8034-a827-e2b6dd6c4308" class="bulleted-list"><li style="list-style-type:disc"><strong>Reallıq:</strong> İnsan sosial varlıqdır. Seksual və emosional ehtiyaclar ödənilmədikdə, o &quot;fokuslandığın&quot; işlərdə də məhsuldarlıq aşağı düşür, çünki beyninin bir küncü həmişə o çatışmazlığı düşünür. Sosial bacarıqlar da bir &quot;işdir&quot; və onları inkişaf etdirmək gələcək həyatın üçün vacibdir.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-8016-ba6e-d2432c4cd3c0" class="">2. &quot;Spotlight&quot; Effekti və Ətrafdakılar</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-807e-ae22-f9c545c66b8c" class="">Küçədə kiməsə yaxınlaşanda hamının sənə baxdığını və səni mühakimə etdiyini düşünürsən.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8049-b495-db78f0814e26" class="bulleted-list"><li style="list-style-type:disc"><strong>Həqiqət:</strong> İnsanların çoxu öz daxili dünyasında və telefonundadır. Sənin kiməsə yaxınlaşmağın onların yaddaşında cəmi 30 saniyə qalacaq.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8016-8c2a-edd4dda22e68" class="bulleted-list"><li style="list-style-type:disc"><strong>Tövsiyə:</strong> &quot;3 saniyə qaydası&quot;nı tətbiq et. Birini gördünsə və xoşuna gəldisə, beynin sənə qorxu siqnalları göndərməyə başlamazdan əvvəl (yəni 3 saniyə ərzində) hərəkətə keç.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80bb-9417-fa1759795145" class="">3. Yanaşma Strategiyası (Cold Approach)</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8013-a615-f99f3f289137" class="">Küçədə tanışlıq ən çətin metoddur, çünki qızlar adətən harasa tələsir və müdafiə modunda olurlar.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80a3-89d8-efc5b5663034" class="bulleted-list"><li style="list-style-type:disc"><strong>Təbii ol:</strong> &quot;Seksi&quot; qız gördükdə ona bir &quot;obyekt&quot; kimi yox, sadəcə maraqlı bir insan kimi baxmağa çalış.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80e1-8122-efca16c4482d" class="bulleted-list"><li style="list-style-type:disc"><strong>Birbaşa və dürüst ol:</strong> &quot;Salam, yoldan keçirdim, enerjin/stilin diqqətimi çəkdi, tanış olmaq istədim&quot; kimi sadə bir cümlə kifayətdir.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-809a-94c1-fc91c870ece5" class="bulleted-list"><li style="list-style-type:disc"><strong>Rədd edilməni qəbul et:</strong> Əgər &quot;yox&quot; deyirsə və ya soyuq davranırsa, bu sənin pis olmağın deyil, sadəcə o anın uyğun olmamasıdır. Təşəkkür et və yoluna davam et. Bu, özünə inamını artıracaq.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-8021-95e1-c8b9e57cc7d1" class="">4. Qeyri-ciddi Münasibət və Gözləntilər</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8024-8b32-f51c047682b5" class="">Əgər məqsədin seksual ehtiyaclar və qeyri-ciddi münasibətdirsə, burada iki vacib məqam var:</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80d4-948e-dd9b7a350e82" class="bulleted-list"><li style="list-style-type:disc"><strong>Dürüstlük:</strong> Münasibətin başında və ya gedişatında qarşı tərəfə ciddi bir şey axtarmadığını (yumşaq formada) hiss etdirməlisən. Bu, həm səni &quot;mesajlaşmaq məcburiyyəti&quot;ndən xilas edər, həm də qarşı tərəfi aldatmamış olarsan.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8004-9f57-e27b08365b36" class="bulleted-list"><li style="list-style-type:disc"><strong>Məkan seçimi:</strong> Küçə əvəzinə Tinder, Bumble kimi tətbiqlər və ya barlar/klublar bu cür &quot;short-term&quot; (qısamüddətli) münasibətlər üçün daha uyğun platformalardır. Oradakı insanların məqsədi onsuz da sənin istəyinlə üst-üstə düşür.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80fc-9e6c-fb970c477864" class="">5. Özünü Təkmilləşdirmək</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8080-ac8e-ddc56fc67e52" class="">Qızların səni bəyənməyəcəyi düşüncəsini yox etmək üçün öz üzərində işləməyə davam et:</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8067-a10c-c65dcbafd1eb" class="bulleted-list"><li style="list-style-type:disc"><strong>Xarici görünüş:</strong> İdman, düzgün geyim və baxımlı olmaq özünə inamı 50% artırır.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8086-b69f-e6d0318d7ad4" class="bulleted-list"><li style="list-style-type:disc"><strong>Dialoq:</strong> Tanımadığın insanlarla (satıcılar, ofisiantlar) kiçik söhbətlər (small talk) edərək sosial &quot;əzələlərini&quot; məşq etdir.</li></ul></div><div style="display:contents" dir="auto"><hr id="2e3b8bfb-6e5c-80b5-87da-dd1e6dfd3b68"/></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-808b-b34f-e0cb0d20c87d" class="">Sənin üçün ilk kiçik addım nə ola bilər?</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8078-a273-e2ea4afaf222" class="">Bəlkə bu həftəsonu küçədə kiməsə yaxınlaşıb nömrə istəmək yox, sadəcə tanımadığın 3 fərqli qıza (heç bir gözlənti olmadan) səmimi bir kompliment deyib yoluna davam edəsən? Bu, səndəki o &quot;yaxınlaşma qorxusunu&quot; qırmağa kömək edər.</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80c9-ad08-fcad3f5bc584" class="">Bununla bağlı daha spesifik bir vəziyyəti (məsələn, dialoqu necə başlatmaq olar) müzakirə etmək istərdin?</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8042-9709-cb8a83d8f8d1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80f5-af26-d23aa17db6ec" class="">Tanımadığım şəxslərə, qızlar da daxil, müraciətdə &quot;sən&quot; yoxsa &quot;siz&quot; demək arasında qərarsız qalıram.</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-805d-93b4-e58c8cc87165" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80cc-9c00-dfc722824921" class="">Bu, həm etiket, həm də &quot;oyunun qaydaları&quot; baxımından çox kritik bir nöqtədir. Azərbaycan mühitində müraciət forması sənin haqqında ilkin təəssüratı yaradan əsas amildir.</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80ef-bd69-de941bce4d1c" class="">Tanımadığın birinə, xüsusən də küçədə yaxınlaşarkən seçimini bu meyarlara görə edə bilərsən:</p></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80da-b459-f1ecd0f813bd" class="">1. Qızıl Qayda: &quot;Siz&quot; ilə başlayın</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80c2-b0f2-f6d435e37c73" class="">Küçə (cold approach) mühitində qızlar adətən müdafiə mövqeyində olurlar. &quot;Siz&quot; müraciəti sənin təhlükəsiz, mədəni və &quot;yuxarı səviyyəli&quot; birisi olduğun mesajını verir.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80ba-9e8f-d2347debcaf2" class="bulleted-list"><li style="list-style-type:disc"><strong>Niyə &quot;Siz&quot;?</strong> Çünki bu, qarşı tərəfə hörmət etdiyini göstərir və onun şəxsi sərhədlərinə dərhal girmədiyini nümayiş etdirir. &quot;Sən&quot; demək bəzən (hər zaman deyil) aqressiv və ya &quot;küçə adamı&quot; təəssüratı yarada bilər.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80a2-a80c-ce9a4ad0f6c3" class="bulleted-list"><li style="list-style-type:disc"><strong>Nümunə:</strong> <em>&quot;Bağışlayın, </em><em><strong>sizə</strong></em><em> bir dəqiqə mane ola bilərəm? Sizin tərziniz/stilinizi çox bəyəndim, salam vermədən keçmək istəmədim.&quot;</em></li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80c8-af3e-c3de710d36c3" class="">2. &quot;Sən&quot; nə vaxt işlədilə bilər?</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8099-a46f-d5b7569ec20f" class="">Əgər mühit çox qeyri-rəsmidirsə (məsələn: universitet dəhlizi, party, gənclərin çox olduğu bir festival və ya barda), &quot;sən&quot; müraciəti daha səmimi və təbii görünə bilər.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80c7-925d-f22c7197756d" class="bulleted-list"><li style="list-style-type:disc"><strong>Yaş amili:</strong> Əgər qarşındakı şəxs səndən yaşca kiçik görünürsə və ya tam sənin yaşlarındadırsa, &quot;sən&quot; demək aradakı buzları daha tez qıra bilər. Amma yenə də risklidir.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80f7-9ebd-d48432ecf85a" class="bulleted-list"><li style="list-style-type:disc"><strong>Nümunə:</strong> <em>&quot;Salam, </em><em><strong>səninlə</strong></em><em> tanış olmaq olar?&quot;</em> (Bu, daha cəsarətli və birbaşa yanaşmadır).</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-8084-aaae-ec906e0f5930" class="">3. Keçid Strategiyası (Ən yaxşısı)</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80aa-a8bf-d2856e9b3611" class="">Ən ideal yol söhbətə <strong>&quot;Siz&quot;</strong> ilə başlayıb, qarşı tərəfin enerjisinə görə **&quot;Sən&quot;**ə keçməkdir.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8020-bd4e-ca49e55e4a72" class="bulleted-list"><li style="list-style-type:disc">Əgər o, sənə gülümseyərək və səmimi cavab verirsə, söhbətin 2-ci dəqiqəsində deyə bilərsən: <em>&quot;Əslində çox rəsmi alınmasın deyə &#x27;sən&#x27;lə müraciət etmək istərdim, eybi yoxdur ki?&quot;</em></li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80b2-881b-c774de1c7983" class="bulleted-list"><li style="list-style-type:disc">Bu sualın özü belə bir flirt növüdür, çünki sən onun icazəsini alaraq aradakı məsafəni qısaltmış olursan.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-807f-9680-cfd223155422" class="">4. Niyə &quot;Siz&quot; sənin lehinə işləyir?</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8045-b64e-db36d11ef9e5" class="">Sən qeyri-ciddi münasibət və seksual ehtiyaclar dediyin üçün bir məqamı unutma: Qadınlar adətən <strong>&quot;social intelligence&quot;</strong> (sosial zəka) səviyyəsi yüksək olan kişilərə daha çox cəlb olunurlar.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80a2-a845-cfaf77f5f509" class="bulleted-list"><li style="list-style-type:disc">Mədəni şəkildə &quot;Siz&quot; deyərək yaxınlaşan, lakin baxışları və özünəinamı ilə seksual enerjisini hiss etdirən kişi, kobud şəkildə &quot;Sən&quot; deyən kişidən qat-qat daha cəlbedicidir. Bu, sənin &quot;standartın&quot; olduğunu göstərir.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80e4-9c90-f37acfb80f05" class="">Xülasə:</h3></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80de-b0d5-ecb50af29294" class="bulleted-list"><li style="list-style-type:disc"><strong>Küçədə/İctimai yerdə:</strong> Həmişə <strong>&quot;Siz&quot;</strong> ilə başla. Bu, onun &quot;müdafiə divarlarını&quot; aşağı salacaq.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8041-8123-f76900806f23" class="bulleted-list"><li style="list-style-type:disc"><strong>Sosial mühitlərdə (bar, tədbir):</strong> Sən deyə bilərsən, amma &quot;Siz&quot; hələ də ən təhlükəsiz və klas seçimdir.</li></ul></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8042-9fbf-d6f7f095ff66" class=""><strong>Səncə, hansı müraciət forması sənin özünü daha rahat və özünəinamlı hiss etməyinə kömək edərdi?</strong> (Bəzən &quot;sən&quot; demək insanı daha çox həyəcanlandırır, çünki daha çox &quot;yaxınlıq&quot; tələb edir).</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80ac-846f-c2563399c510" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80ea-8039-f5481f2d21a5" class="">Qıza öz daimi işlətdiyim nömrəmi və ya sosial şəbəkəmi lazım gəldikdə vermək istəmərəm. Birdən danışıq müddətində sevgilisi, əri zadı olsa xəbər tutduqda bezdirici hal yaşanar. Neyləmək olar?</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80a1-be42-f2cd7010766c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80c9-bc08-fa82ca69103d" class="">Bu, şəxsi təhlükəsizlik və gizlilik baxımından çox məntiqlı bir yanaşmadır. Xüsusilə də qeyri-ciddi və ya seksual yönümlü münasibətlərdə hər iki tərəfin gizliliyini qoruması hər hansı bir dramın və ya arzuolunmaz vəziyyətin qarşısını alır.</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-801e-9e7f-f9937b886d83" class="">Daimi nömrəni və əsas hesablarını vermədən əlaqə saxlamağın bir neçə effektiv yolu var:</p></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80c5-9f65-d479386256d5" class="">1. Telegram: &quot;Username&quot; Gücü</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80a9-a8c4-fa26dbad64c5" class="">Telegram hazırda bu işlər üçün ən təhlükəsiz platformadır.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-809d-996b-ece70b65c59b" class="bulleted-list"><li style="list-style-type:disc"><strong>Nömrəni Gizlət:</strong> Ayarlardan nömrəni &quot;Heç kim&quot; (Nobody) görə bilməyəcək şəkildə bağlaya bilərsən.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8072-9b19-fdda579121ab" class="bulleted-list"><li style="list-style-type:disc"><strong>İstifadəçi Adı (Username):</strong> Qıza nömrə yox, sadəcə <code>@istifadeci_adi</code> formatında adını verirsən. O sənin nömrəni heç vaxt görmür.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80bb-acc6-eb7f2b5424fb" class="bulleted-list"><li style="list-style-type:disc"><strong>Məxfi Söhbət (Secret Chat):</strong> Bu funksiya mesajların müəyyən müddətdən sonra hər iki tərəfdən silinməsini təmin edir və screenshot almağa icazə vermir.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-8016-8725-ff608f359d90" class="">2. İkinci &quot;Flirt&quot; Profili (Instagram)</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-801e-8bed-ed5714d050f8" class="">Əsas profilini (dostlarının, ailənin olduğu hesabı) vermək istəmirsənsə, ikinci bir hesab aça bilərsən.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80f1-b12d-cd331a1ceb4f" class="bulleted-list"><li style="list-style-type:disc"><strong>Profilin Görünüşü:</strong> Bu profil &quot;fake&quot; kimi görünməməlidir. Bir neçə keyfiyyətli şəklin, hobbilərinlə bağlı 3-5 postun olsun.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-80ff-a2f3-c53871f5c41f" class="bulleted-list"><li style="list-style-type:disc"><strong>Sinxronizasiyanı Bağla:</strong> Hesabı açarkən &quot;kontaktları sinxronizasiya et&quot; funksiyasını bağla ki, tanıdıqlarının qarşısına &quot;təklif olunan dost&quot; kimi çıxmayasan.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8012-a18e-ff084a67b88b" class="bulleted-list"><li style="list-style-type:disc"><strong>Faydası:</strong> Qızlar adətən kiminlə danışdıqlarını vizual olaraq görmək istəyirlər. İkinci profil həm bu ehtiyacı qarşılayır, həm də sənin real həyatını izolyasiya edir.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-806b-a1c7-d31395972f92" class="">3. İkinci SİM Kart və ya Virtual Nömrə</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8020-b017-e0a90688f4ec" class="">Əgər mütləq WhatsApp üzərindən danışmaq lazımdırsa:</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8080-9619-d12111a2e7a0" class="bulleted-list"><li style="list-style-type:disc"><strong>Ucuz SİM kart:</strong> Sadəcə bu işlər üçün işlədəcəyin, adına olmayan (və ya sadəcə kənarda saxladığın) ikinci bir nömrə al.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-805c-b24f-f8534de1083a" class="bulleted-list"><li style="list-style-type:disc"><strong>WhatsApp Business:</strong> Telefonuna həm normal WhatsApp, həm də &quot;WhatsApp Business&quot; yükləyə bilərsən. Beləcə, bir telefonda iki fərqli nömrə ilə iki fərqli həyat sürə bilərsən.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-80aa-b833-ce4a6bb63e66" class="">4. Snapchat</h3></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80ab-bad7-c1e131414670" class="">Azərbaycanda o qədər populyar olmasa da, seksual ehtiyaclar və &quot;qeyri-ciddi&quot; münasibətlər üçün dünya üzrə 1 nömrəli proqramdır.</p></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-807a-bfa4-e5e6d904b87a" class="bulleted-list"><li style="list-style-type:disc"><strong>Niyə?</strong> Çünki şəkillər və mesajlar baxıldıqdan dərhal sonra silinir. Kiminsə nəsə &quot;tutmaq&quot; ehtimalı sıfıra yaxındır.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2e3b8bfb-6e5c-8051-af85-c3f3d29299f8" class="">Təhlükəsizlik Üçün Əlavə Məsləhətlər:</h3></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8039-8269-fe9b9f44fb12" class="bulleted-list"><li style="list-style-type:disc"><strong>Məkan Seçimi:</strong> İlk görüşlər üçün evinin çox yaxınlığındakı yerləri yox, bir az kənar, amma rahat məkanları seç.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-804b-afda-ea6093116f47" class="bulleted-list"><li style="list-style-type:disc"><strong>İnformasiya Filteri:</strong> Münasibət müəyyən bir etibar mərhələsinə çatana qədər iş yerin, tam ünvanın və ya ailən haqqında detallı məlumat verməkdən çəkin.</li></ul></div><div style="display:contents" dir="auto"><ul id="2e3b8bfb-6e5c-8033-b39a-ff67fba70bf8" class="bulleted-list"><li style="list-style-type:disc"><strong>İnstinktlərinə Güvən:</strong> Əgər qarşı tərəfin davranışlarında şübhəli məqamlar (məsələn, zənglərə heç vaxt cavab verməməsi, yalnız müəyyən saatlarda yazması) görsənsə, deməli həqiqətən də kimisə gizlədir. Bu halda daha diqqətli olmalısan.</li></ul></div><div style="display:contents" dir="auto"><hr id="2e3b8bfb-6e5c-8068-a0de-ec45836d180e"/></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-80ec-8580-f13f59ceac62" class=""><strong>Səncə, bu seçimlərdən hansı sənin həyat tərzinə daha uyğundur?</strong> Məsələn, ikinci bir Instagram hesabı idarə etmək sənə çətin gəlməz, yoxsa sadəcə Telegram istifadəçi adını vermək daha rahatdır?</p></div><div style="display:contents" dir="auto"><p id="2e3b8bfb-6e5c-8012-9f90-eb0199086bd0" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Social Brain - Söhbət Mövzuları və Faktlar",
   description: "Söhbətlərinizi canlandırmaq üçün rəqəmsal beyin.",
   manifest: "/manifest.json",
+
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import { useTopics } from '@/hooks/useTopics'; // Switch to Backendless hook
 import { INSPIRATION_TOPICS, Topic } from '@/data/inspiration';
 import { TopicCard } from '@/components/TopicCard';
-import { Plus, Search, Shuffle, X, Lightbulb, Quote, Settings, Copy, Check, Download, Upload, LayoutGrid, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent } from 'lucide-react';
+import { Plus, Search, Shuffle, X, Lightbulb, Quote, Settings, Copy, Check, Download, Upload, LayoutGrid, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent, Heart, Sparkles, MessageCircle, Shield, ArrowUpDown, Clapperboard, Smile } from 'lucide-react';
 import { clsx } from 'clsx';
 import { cn } from '@/lib/utils';
 
@@ -16,10 +16,14 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('Hamısı');
   const [selectedVibe, setSelectedVibe] = useState<string | null>(null);
+  const [selectedSort, setSelectedSort] = useState<'newest' | 'oldest' | 'az' | 'za'>('newest');
+  const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   
   // Icon Mapping
   const categoryIcons: Record<string, any> = {
     'Hamısı': LayoutGrid,
+    'Tanışlıq': Heart,
+    'Kişilik': Shield,
     'Elm': Atom,
     'Tarix': History,
     'Texnologiya': Cpu,
@@ -31,7 +35,9 @@ export default function Home() {
     'Fəlsəfə': BookOpen,
     'Sağlamlıq': HeartPulse,
     'İdman': Trophy,
-    'Türk Tarixi': Tent
+    'Türk Tarixi': Tent,
+    'Filmlər/Seriallar': Clapperboard,
+    'Gülməli': Smile
   };
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -41,6 +47,13 @@ export default function Home() {
   const [sosTopic, setSosTopic] = useState<Topic | null>(null);
   const [randomTopic, setRandomTopic] = useState<Topic | null>(null);
   const [viewingTopic, setViewingTopic] = useState<Topic | null>(null);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  
+  // Filter Dropdown States
+  const [isFilterCatOpen, setIsFilterCatOpen] = useState(false);
+  const [isFilterVibeOpen, setIsFilterVibeOpen] = useState(false);
+  const [filterCatSearch, setFilterCatSearch] = useState('');
+  const [filterVibeSearch, setFilterVibeSearch] = useState('');
 
   // Settings State
   const [importData, setImportData] = useState('');
@@ -55,10 +68,17 @@ export default function Home() {
   const [newTopicQuestion, setNewTopicQuestion] = useState('');
   const [newTopicVibes, setNewTopicVibes] = useState<string[]>([]);
 
-  const categories = ['Hamısı', 'Türk Tarixi', 'Elm', 'Tarix', 'Texnologiya', 'Siyasət', 'İncəsənət', 'Təbiət', 'Psixologiya', 'Kosmos', 'Fəlsəfə', 'Sağlamlıq', 'İdman'];
+  const categories = ['Hamısı', 'Tanışlıq', 'Kişilik', 'Türk Tarixi', 'Filmlər/Seriallar', 'Gülməli', 'Elm', 'Tarix', 'Texnologiya', 'Siyasət', 'İncəsənət', 'Təbiət', 'Psixologiya', 'Kosmos', 'Fəlsəfə', 'Sağlamlıq', 'İdman'];
   
   const vibesList = [
       { id: '🐺 Türk', label: '🐺 Türk Soyu' },
+      { id: '🗿 Stoik', label: '🗿 Stoik/Sakit' },
+      { id: '😏 Flirt', label: '😏 Flirt/Tanışlıq' },
+      { id: '✨ Xarizma', label: '✨ Xarizma' },
+      { id: '🤝 Qardaşlıq', label: '🤝 Qardaşlıq' },
+      { id: '⚖️ Şərəf', label: '⚖️ Şərəf/Söz' },
+      { id: '💪 Bədən Dili', label: '💪 Bədən Dili' },
+      { id: '🗣️ Ünsiyyət', label: '🗣️ Ünsiyyət' },
       { id: '🧊 Buzqıran', label: '🧊 Buzqıran' },
       { id: '😂 Gülməli', label: '😂 Gülməli' },
       { id: '🤔 Dərin', label: '🤔 Dərin/Fəlsəfi' },
@@ -66,17 +86,24 @@ export default function Home() {
       { id: '💼 İş', label: '💼 İş/Karyera' },
       { id: '☕ Chill', label: '☕ Chill/Rahat' },
       { id: '👻 Sirli', label: '👻 Sirli' },
+      { id: '🍔 Yemək', label: '🍔 Yemək' },
+      { id: '🌍 Səyahət', label: '🌍 Səyahət' },
+      { id: '🥶 Qorxulu', label: '🥶 Qorxulu' },
+      { id: '💀 Ölüm', label: '💀 Ölüm' },
+      { id: '😱 Dəhşət', label: '😱 Dəhşət' },
+      { id: '🐝 Təbiət', label: '🐝 Təbiət' },
+      { id: '🤢 İyrənc', label: '🤢 İyrənc' },
+      { id: '⚔️ Döyüş', label: '⚔️ Döyüş' },
+      { id: '🔥 Güc', label: '🔥 Güc' },
+      { id: '👑 Lider', label: '👑 Lider' },
+      { id: '🤣 Gülməli', label: '🤣 Gülməli' },
+      { id: '⏳ Vaxt', label: '⏳ Vaxt' },
   ];
 
   // Derived State
-  // The original dynamic categories useMemo is removed as per the diff's hardcoded list.
-  // The filteredMyTopics and filteredInspiration are replaced by a single filteredTopics.
+  // "Mövzularım" (My Topics) - SADECE istifadəçinin əlavə etdikləri.
   const filteredTopics = useMemo(() => {
-    let source = [...myTopics];
-    // If user has no personal topics, show inspiration topics as a starter
-    if (source.length === 0) source = [...INSPIRATION_TOPICS];
-
-    return source.filter((topic) => {
+    return myTopics.filter((topic) => {
       const matchesSearch =
         topic.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         topic.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -84,24 +111,67 @@ export default function Home() {
       
       const matchesCategory = selectedCategory === 'Hamısı' || topic.category === selectedCategory;
       
-      // Vibe filtri: Əgər vibe seçilibsə, mövzunun vibes massivində olmalıdır
+      // Vibe filtri
       const matchesVibe = !selectedVibe || (topic.vibes && topic.vibes.includes(selectedVibe));
 
       return matchesSearch && matchesCategory && matchesVibe;
     });
   }, [myTopics, searchQuery, selectedCategory, selectedVibe]);
 
+  // "Maraqlı Faktlar" (Inspiration) - Statik baza.
   const filteredInspiration = useMemo(() => {
-     return INSPIRATION_TOPICS.filter((t) => {
+     let result = INSPIRATION_TOPICS.filter((t) => {
       const matchesSearch =
         t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         t.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory =
         selectedCategory === 'Hamısı' || t.category === selectedCategory;
-      const matchesVibe = !selectedVibe || (t.vibes && t.vibes.includes(selectedVibe)); // Added vibe filter
+      const matchesVibe = !selectedVibe || (t.vibes && t.vibes.includes(selectedVibe));
+      
+      // Əgər axtarış varsa, kateqoriya və vibe filtrlərini iqnor et (Qlobal Axtarış)
+      if (searchQuery) {
+          return matchesSearch;
+      }
+
       return matchesSearch && matchesCategory && matchesVibe;
     });
-  }, [searchQuery, selectedCategory, selectedVibe]); // Added selectedVibe dependency
+
+    // Sorting Logic
+    if (selectedSort === 'newest') {
+        result.sort((a, b) => {
+            const idA = parseInt(a.id.replace('fact-', ''));
+            const idB = parseInt(b.id.replace('fact-', ''));
+            return idB - idA;
+        });
+    } else if (selectedSort === 'oldest') {
+        result.sort((a, b) => {
+            const idA = parseInt(a.id.replace('fact-', ''));
+            const idB = parseInt(b.id.replace('fact-', ''));
+            return idA - idB;
+        });
+    } else if (selectedSort === 'az') {
+        result.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (selectedSort === 'za') {
+        result.sort((a, b) => b.title.localeCompare(a.title));
+    }
+
+    return result;
+  }, [searchQuery, selectedCategory, selectedVibe, selectedSort]);
+
+  // Pagination State for Inspiration
+  const [visibleInspirationCount, setVisibleInspirationCount] = useState(6);
+  
+  const handleLoadMore = () => {
+    setVisibleInspirationCount((prev) => prev + 6);
+  };
+
+  // Reset pagination when filters change
+  useMemo(() => {
+    setVisibleInspirationCount(6);
+  }, [searchQuery, selectedCategory, selectedVibe]);
+
+  const displayedInspiration = filteredInspiration.slice(0, visibleInspirationCount);
+
 
   // Handlers
   const handleAddTopic = (e: React.FormEvent) => {
@@ -189,6 +259,13 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-3">
              <button
+               onClick={() => setIsAddModalOpen(true)}
+               className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-900 hover:text-indigo-400 md:block hidden"
+               aria-label="Yeni Mövzu"
+             >
+               <Plus className="h-5 w-5" />
+             </button>
+             <button
               onClick={() => setIsSettingsOpen(true)}
               className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-900 hover:text-slate-200"
               aria-label="Tənzimləmələr"
@@ -208,7 +285,7 @@ export default function Home() {
 
       <div className="mx-auto max-w-2xl gap-6 px-4 py-6">
         {/* Search & Filter */}
-        <div className="mb-8 space-y-4">
+        <div className="mb-0 space-y-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
             <input
@@ -220,60 +297,134 @@ export default function Home() {
             />
           </div>
           {/* Tabs & Filters */}
-        <div className="space-y-4 mb-8">
-            {/* Category Tabs */}
-            <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide py-1">
-            {categories.map((cat) => {
-                const Icon = categoryIcons[cat];
-                return (
+        {/* Searchable Dropdowns for Filter */}
+        <div className="flex gap-3 mb-8">
+            {/* Category Filter */}
+            <div className="relative flex-1">
                 <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={clsx(
-                    'whitespace-nowrap flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-all',
-                    selectedCategory === cat
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50'
-                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200'
-                )}
+                    onClick={() => {
+                        setIsFilterCatOpen(!isFilterCatOpen);
+                        setIsFilterVibeOpen(false);
+                    }}
+                    className="flex w-full items-center justify-between rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:border-slate-700"
                 >
-                {Icon && <Icon className="w-4 h-4" />}
-                {cat}
+                    <div className="flex items-center gap-2 overflow-hidden">
+                        {(() => {
+                            const Icon = categoryIcons[selectedCategory];
+                            return Icon ? <Icon className="h-4 w-4 shrink-0 text-indigo-400" /> : <LayoutGrid className="h-4 w-4 shrink-0 text-indigo-400" />;
+                        })()}
+                        <span className="truncate">{selectedCategory}</span>
+                    </div>
+                     <div className={clsx("w-2 h-2 border-r-2 border-b-2 border-slate-500 transform transition-transform ml-2 shrink-0", isFilterCatOpen ? "-rotate-135 translate-y-0.5" : "rotate-45 -translate-y-0.5")}></div>
                 </button>
-            )})}
+
+                {isFilterCatOpen && (
+                    <div className="absolute top-full left-0 z-20 mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 p-2 shadow-2xl animate-in fade-in zoom-in-95">
+                        <input
+                            autoFocus
+                            type="text"
+                            placeholder="Axtar..."
+                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:border-indigo-500 focus:outline-none mb-2"
+                            onChange={(e) => setFilterCatSearch(e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                        <div className="max-h-48 overflow-y-auto space-y-1 scrollbar-thin scrollbar-thumb-slate-800">
+                             {categories.filter(c => c.toLowerCase().includes((filterCatSearch || '').toLowerCase())).map(cat => (
+                                 <button
+                                    key={cat}
+                                    onClick={() => {
+                                        setSelectedCategory(cat);
+                                        setIsFilterCatOpen(false);
+                                        setFilterCatSearch('');
+                                    }}
+                                    className={clsx(
+                                        "w-full flex items-center gap-2 rounded-lg px-3 py-2 text-xs transition-colors text-left",
+                                        selectedCategory === cat ? "bg-indigo-600 text-white" : "text-slate-400 hover:bg-slate-900"
+                                    )}
+                                 >
+                                    {(() => { const Icon = categoryIcons[cat]; return Icon ? <Icon className="w-3.5 h-3.5 opacity-70" /> : null; })()}
+                                    {cat}
+                                 </button>
+                             ))}
+                        </div>
+                    </div>
+                )}
             </div>
-            
-            {/* Vibe Chips */}
-            <div className="flex flex-wrap gap-2">
+
+            {/* Vibe Filter */}
+            <div className="relative flex-1">
                  <button
-                    onClick={() => setSelectedVibe(null)}
-                    className={clsx(
-                        'px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wide border transition-all',
-                        selectedVibe === null
-                        ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400'
-                        : 'border-slate-800 bg-slate-900 text-slate-500 hover:border-slate-700'
-                    )}
-                 >
-                    🌈 Hamısı
-                 </button>
-                 {vibesList.map((vibe) => (
-                    <button
-                        key={vibe.id}
-                        onClick={() => setSelectedVibe(vibe.id === selectedVibe ? null : vibe.id)}
-                        className={clsx(
-                            'px-3 py-1 rounded-lg text-xs font-medium transition-all border',
-                            selectedVibe === vibe.id
-                            ? 'bg-slate-100 text-slate-900 border-white'
-                            : 'bg-slate-900/50 text-slate-400 border-slate-800 hover:border-slate-600'
+                    onClick={() => {
+                        setIsFilterVibeOpen(!isFilterVibeOpen);
+                        setIsFilterCatOpen(false);
+                    }}
+                    className="flex w-full items-center justify-between rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:border-slate-700"
+                >
+                    <div className="flex items-center gap-2 overflow-hidden">
+                        {selectedVibe ? (
+                            <>
+                                <span className="truncate">{vibesList.find(v => v.id === selectedVibe)?.label || selectedVibe}</span>
+                            </>
+                        ) : (
+                            <>
+                                <Sparkles className="h-4 w-4 shrink-0 text-amber-400" />
+                                <span className="truncate">Bütün Duyğular</span>
+                            </>
                         )}
-                    >
-                        {vibe.label}
-                    </button>
-                 ))}
+                    </div>
+                    <div className={clsx("w-2 h-2 border-r-2 border-b-2 border-slate-500 transform transition-transform ml-2 shrink-0", isFilterVibeOpen ? "-rotate-135 translate-y-0.5" : "rotate-45 -translate-y-0.5")}></div>
+                </button>
+
+                {isFilterVibeOpen && (
+                    <div className="absolute top-full right-0 z-20 mt-2 w-full rounded-xl border border-slate-800 bg-slate-950 p-2 shadow-2xl animate-in fade-in zoom-in-95">
+                         <input
+                            autoFocus
+                            type="text"
+                            placeholder="Duyğu axtar..."
+                            className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:border-indigo-500 focus:outline-none mb-2"
+                            onChange={(e) => setFilterVibeSearch(e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                         <div className="max-h-48 overflow-y-auto space-y-1 scrollbar-thin scrollbar-thumb-slate-800">
+                             <button
+                                onClick={() => {
+                                    setSelectedVibe(null);
+                                    setIsFilterVibeOpen(false);
+                                }}
+                                className={clsx(
+                                    "w-full flex items-center gap-2 rounded-lg px-3 py-2 text-xs transition-colors text-left",
+                                    selectedVibe === null ? "bg-indigo-600 text-white" : "text-slate-400 hover:bg-slate-900"
+                                )}
+                             >
+                                <Sparkles className="w-3.5 h-3.5 opacity-70" />
+                                Bütün Duyğular
+                             </button>
+                             {vibesList.filter(v => v.label.toLowerCase().includes((filterVibeSearch || '').toLowerCase())).map(vibe => (
+                                 <button
+                                    key={vibe.id}
+                                    onClick={() => {
+                                        setSelectedVibe(vibe.id);
+                                        setIsFilterVibeOpen(false);
+                                        setFilterVibeSearch('');
+                                    }}
+                                    className={clsx(
+                                        "w-full flex items-center gap-2 rounded-lg px-3 py-2 text-xs transition-colors text-left",
+                                        selectedVibe === vibe.id ? "bg-indigo-600 text-white" : "text-slate-400 hover:bg-slate-900"
+                                    )}
+                                 >
+                                    <span>{vibe.label}</span>
+                                 </button>
+                             ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
         </div>
 
         {/* My Topics Section */}
+        {/* My Topics Section - Only visible if user has topics */}
+        {myTopics.length > 0 && (
         <section className="mb-10 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-slate-200">Mövzularım</h2>
@@ -303,22 +454,51 @@ export default function Home() {
               />
             ))}
           </div>
+
           
           {filteredTopics.length === 0 && searchQuery && (
              <p className="text-center text-sm text-slate-600 py-8">Axtarışa uyğun mövzu tapılmadı.</p>
           )}
         </section>
+        )}
 
         {/* Inspiration Feed */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-semibold text-slate-200">Maraqlı Faktlar</h2>
-            <span className="rounded-full bg-indigo-500/10 px-2 py-0.5 text-[10px] font-bold text-indigo-400">YENİ</span>
+        <section className="space-y-4 pt-4 border-t border-slate-800/50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+               <h2 className="text-lg font-semibold text-slate-200">Maraqlı Faktlar</h2>
+               <span className="rounded-full bg-indigo-500/10 px-2 py-0.5 text-[10px] font-bold text-indigo-400">KƏŞF ET</span>
+            </div>
+
+             {/* Sort Dropdown Button */}
+             <div className="relative">
+                 <button 
+                    onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                    className="flex items-center gap-1.5 rounded-lg bg-slate-900 px-3 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                 >
+                    <ArrowUpDown className="w-3.5 h-3.5" />
+                    <span>
+                        {selectedSort === 'newest' && 'Ən Yeni'}
+                        {selectedSort === 'oldest' && 'Ən Köhnə'}
+                        {selectedSort === 'az' && 'A-Z'}
+                        {selectedSort === 'za' && 'Z-A'}
+                    </span>
+                 </button>
+                 
+                 {isSortDropdownOpen && (
+                     <div className="absolute right-0 top-full mt-2 w-36 rounded-xl border border-slate-800 bg-slate-950 p-1 shadow-xl z-50">
+                         <button onClick={() => { setSelectedSort('newest'); setIsSortDropdownOpen(false); }} className={cn("w-full text-left px-3 py-2 text-xs rounded-lg transition-colors", selectedSort === 'newest' ? "bg-indigo-500/10 text-indigo-400" : "text-slate-400 hover:bg-slate-900")}>Ən Yeni</button>
+                         <button onClick={() => { setSelectedSort('oldest'); setIsSortDropdownOpen(false); }} className={cn("w-full text-left px-3 py-2 text-xs rounded-lg transition-colors", selectedSort === 'oldest' ? "bg-indigo-500/10 text-indigo-400" : "text-slate-400 hover:bg-slate-900")}>Ən Köhnə</button>
+                         <button onClick={() => { setSelectedSort('az'); setIsSortDropdownOpen(false); }} className={cn("w-full text-left px-3 py-2 text-xs rounded-lg transition-colors", selectedSort === 'az' ? "bg-indigo-500/10 text-indigo-400" : "text-slate-400 hover:bg-slate-900")}>Ad (A-Z)</button>
+                         <button onClick={() => { setSelectedSort('za'); setIsSortDropdownOpen(false); }} className={cn("w-full text-left px-3 py-2 text-xs rounded-lg transition-colors", selectedSort === 'za' ? "bg-indigo-500/10 text-indigo-400" : "text-slate-400 hover:bg-slate-900")}>Ad (Z-A)</button>
+                     </div>
+                 )}
+             </div>
           </div>
           <p className="text-sm text-slate-500">Söhbət başlatmaq üçün seçilmiş maraqlı faktlar və mövzular.</p>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {filteredInspiration.map((topic) => (
+            {displayedInspiration.map((topic) => (
               <TopicCard
                 key={topic.id}
                 topic={topic}
@@ -328,6 +508,20 @@ export default function Home() {
               />
             ))}
           </div>
+
+          {/* Load More Button */}
+          {visibleInspirationCount < filteredInspiration.length && (
+              <button
+                onClick={handleLoadMore}
+                className="w-full mt-4 py-3 rounded-xl border border-slate-800 bg-slate-900/50 text-slate-400 text-sm font-medium hover:bg-slate-900 hover:text-slate-200 transition-colors"
+            >
+                Daha çox göstər ({filteredInspiration.length - visibleInspirationCount} qaldı)
+            </button>
+          )}
+          
+          {filteredInspiration.length === 0 && (
+             <p className="text-center text-sm text-slate-600 py-8">Filtrə uyğun fakt tapılmadı.</p>
+          )}
         </section>
       </div>
 
@@ -353,13 +547,18 @@ export default function Home() {
 
       {/* Add Topic Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-200 rounded-2xl border border-slate-800 bg-slate-950 p-6 shadow-2xl">
+        <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            onClick={(e) => {
+                if (e.target === e.currentTarget) setIsAddModalOpen(false);
+            }}
+        >
+          <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-200 rounded-2xl border border-slate-800 bg-slate-950 p-6 shadow-2xl cursor-default">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-slate-100">Yeni Mövzu</h3>
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="rounded-full p-1 text-slate-500 hover:bg-slate-900 hover:text-slate-300"
+                className="rounded-full p-1 text-slate-500 hover:bg-slate-900 hover:text-slate-300 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -376,29 +575,89 @@ export default function Home() {
                   autoFocus
                 />
               </div>
-              <div>
-                 <label className="mb-1 block text-xs font-medium text-slate-400">Kateqoriya</label>
-                 <input
-                  type="text"
-                  value={newTopicCategory}
-                  onChange={(e) => setNewTopicCategory(e.target.value)}
-                  placeholder="Məs: Elm, Təbiət"
-                   className="w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-indigo-500 focus:outline-none"
-                />
+              <div className="relative group">
+                 <label className="mb-2 block text-xs font-medium text-slate-400">Kateqoriya</label>
+                 <div className="relative">
+                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                        {categories.includes(newTopicCategory) ? <Check className="w-4 h-4 text-emerald-500" /> : <Search className="w-4 h-4" />}
+                     </div>
+                     <input
+                        type="text"
+                        value={newTopicCategory}
+                        onChange={(e) => {
+                            setNewTopicCategory(e.target.value);
+                            setIsCategoryDropdownOpen(true);
+                        }}
+                        onFocus={() => setIsCategoryDropdownOpen(true)}
+                        // Delay blur to allow clicking options
+                        onBlur={() => setTimeout(() => setIsCategoryDropdownOpen(false), 200)}
+                        placeholder="Seçin və ya yeni yazın..."
+                        className="w-full rounded-lg border border-slate-800 bg-slate-900 pl-10 pr-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all"
+                     />
+                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                         <div className={clsx("w-2 h-2 border-r-2 border-b-2 border-slate-600 transform transition-transform", isCategoryDropdownOpen ? "-rotate-135 translate-y-0.5" : "rotate-45 -translate-y-0.5")}></div>
+                     </div>
+                 </div>
+
+                 {/* Dropdown Menu */}
+                 {isCategoryDropdownOpen && (
+                    <div className="absolute z-10 mt-1 w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-950 shadow-2xl animate-in fade-in zoom-in-95 duration-100">
+                        <div className="max-h-48 overflow-y-auto p-1 scrollbar-thin scrollbar-thumb-slate-800">
+                            {categories.filter(c => c !== 'Hamısı').filter(cat => 
+                                cat.toLowerCase().includes(newTopicCategory.toLowerCase())
+                            ).map((cat) => (
+                                <button
+                                    key={cat}
+                                    type="button"
+                                    onMouseDown={(e) => {
+                                        e.preventDefault(); // Prevent blur
+                                        setNewTopicCategory(cat);
+                                        setIsCategoryDropdownOpen(false);
+                                    }}
+                                    className={clsx(
+                                        "w-full flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors text-left",
+                                        newTopicCategory === cat ? "bg-indigo-600 text-white" : "text-slate-300 hover:bg-slate-900"
+                                    )}
+                                >
+                                    {categoryIcons[cat] ? (() => { const Icon = categoryIcons[cat]; return <Icon className="w-4 h-4 opacity-70" /> })() : <div className="w-4 h-4" />}
+                                    {cat}
+                                </button>
+                            ))}
+                            {categories.filter(c => c !== 'Hamısı' && c.toLowerCase().includes(newTopicCategory.toLowerCase())).length === 0 && newTopicCategory.trim() !== '' && (
+                                <button
+                                    type="button"
+                                    onMouseDown={(e) => {
+                                        e.preventDefault();
+                                        setNewTopicCategory(newTopicCategory);
+                                        setIsCategoryDropdownOpen(false);
+                                    }}
+                                    className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-indigo-400 hover:bg-slate-900 transition-colors text-left"
+                                >
+                                    <Plus className="w-4 h-4" />
+                                    "{newTopicCategory}" əlavə et
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                 )}
               </div>
+
               <div>
-                <label className="mb-1 block text-xs font-medium text-slate-400">Təsvir (İstəyə bağlı)</label>
+                <label className="mb-1 flex items-center gap-2 text-xs font-medium text-slate-400">
+                    <MessageCircle className="w-3 h-3" />
+                    Təsvir (Fikir və qeydləriniz)
+                </label>
                 <textarea
                   value={newTopicDesc}
                   onChange={(e) => setNewTopicDesc(e.target.value)}
-                  placeholder="Fikir və ya qeydləriniz..."
+                  placeholder="Mövzu haqqında təfərrüatlı qeydlər..."
                   rows={3}
                   className="w-full resize-none rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
               {/* Vibes Selector */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-slate-400">Vibe (Əhval)</label>
+              <label className="mb-2 block text-sm font-medium text-slate-400">Duyğu (Vibe)</label>
               <div className="flex flex-wrap gap-2">
                  {vibesList.map(vibe => (
                      <button
@@ -456,14 +715,14 @@ export default function Home() {
                  <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="flex-1 rounded-lg border border-slate-800 py-2.5 text-sm font-medium text-slate-400 hover:bg-slate-900 hover:text-slate-300"
+                  className="flex-1 rounded-lg border border-slate-800 py-2.5 text-sm font-medium text-slate-400 hover:bg-slate-900 hover:text-slate-300 cursor-pointer"
                 >
                   Ləğv et
                 </button>
                 <button
                   type="submit"
                   disabled={!newTopicTitle.trim()}
-                  className="flex-1 rounded-lg bg-indigo-600 py-2.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-50"
+                  className="flex-1 rounded-lg bg-indigo-600 py-2.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-50 cursor-pointer"
                 >
                   Yadda saxla
                 </button>
@@ -475,11 +734,22 @@ export default function Home() {
 
       {/* View Topic Modal */}
       {viewingTopic && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-           <div className="relative w-full max-w-lg animate-in fade-in zoom-in-95 duration-200 flex flex-col rounded-3xl border border-slate-800 bg-slate-950 p-6 shadow-2xl md:p-8">
+        <div 
+            className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm"
+            onClick={(e) => {
+                if (e.target === e.currentTarget) setViewingTopic(null);
+            }}
+        >
+           <div 
+               className="flex min-h-full items-center justify-center p-4"
+               onClick={(e) => {
+                   if (e.target === e.currentTarget) setViewingTopic(null);
+               }}
+           >
+               <div className="relative w-full max-w-lg animate-in fade-in zoom-in-95 duration-200 flex flex-col rounded-3xl border border-slate-800 bg-slate-950 p-6 shadow-2xl md:p-8 cursor-default my-8">
               <button
                 onClick={() => setViewingTopic(null)}
-                className="absolute right-4 top-4 rounded-full p-2 text-slate-500 hover:bg-slate-900 hover:text-slate-300"
+                className="absolute right-4 top-4 rounded-full p-2 text-slate-500 hover:bg-slate-900 hover:text-slate-300 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -515,8 +785,58 @@ export default function Home() {
               {viewingTopic.source && (
                  <div className="mt-8 flex items-center gap-2 rounded-lg bg-slate-900/50 p-3 text-sm text-slate-400 border border-slate-800/50">
                     <Quote className="h-4 w-4 shrink-0 text-slate-500" />
-                    <span>Mənbə: <span className="font-medium text-slate-300">{viewingTopic.source}</span></span>
+                    <span>Mənbə: {viewingTopic.source.startsWith('http') ? (
+                        <a href={viewingTopic.source} target="_blank" rel="noopener noreferrer" className="font-medium text-indigo-400 hover:underline">
+                            {new URL(viewingTopic.source).hostname.replace('www.', '')}
+                        </a>
+                    ) : (
+                        <span className="font-medium text-slate-300">{viewingTopic.source}</span>
+                    )}</span>
                  </div>
+              )}
+
+              {/* Playlist Section */}
+              {viewingTopic.playlist && (
+                  <div className="mt-6">
+                    <div className="mb-3 flex items-center justify-between">
+                       <span className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+                          <BookOpen className="w-3.5 h-3.5" />
+                          Playlist: {viewingTopic.playlist.title}
+                       </span>
+                       <span className="text-[10px] text-slate-500 bg-slate-900 px-2 py-0.5 rounded-full border border-slate-800">
+                          {viewingTopic.playlist.order}/{viewingTopic.playlist.total}
+                       </span>
+                    </div>
+                    <div className="flex flex-col gap-1.5 bg-slate-900/30 p-2 rounded-xl border border-slate-800/50">
+                       {INSPIRATION_TOPICS.filter(t => t.playlist?.id === viewingTopic.playlist?.id)
+                        .sort((a, b) => (a.playlist?.order || 0) - (b.playlist?.order || 0))
+                        .map(t => (
+                           <button 
+                              key={t.id}
+                              onClick={(e) => {
+                                  e.stopPropagation(); // Prevent modal close
+                                  setViewingTopic(t);
+                              }}
+                              className={cn(
+                                  "flex items-center gap-3 w-full p-2 rounded-lg text-left transition-all text-xs cursor-pointer group",
+                                  t.id === viewingTopic.id 
+                                  ? "bg-indigo-500/10 text-indigo-200 border border-indigo-500/30" 
+                                  : "hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-transparent"
+                              )}
+                           >
+                              <div className={cn(
+                                  "flex items-center justify-center w-5 h-5 rounded-md text-[10px] font-bold shrink-0 transition-colors",
+                                  t.id === viewingTopic.id ? "bg-indigo-500 text-white" : "bg-slate-800 text-slate-600 group-hover:bg-slate-700 group-hover:text-slate-400"
+                              )}>
+                                  {t.playlist?.order}
+                              </div>
+                              <span className="truncate font-medium">{t.title}</span>
+                              {t.id === viewingTopic.id && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.8)]" />}
+                           </button>
+                        ))
+                       }
+                    </div>
+                  </div>
               )}
 
               {/* Social Cheat Sheet */}
@@ -547,10 +867,11 @@ export default function Home() {
               <div className="mt-8 flex justify-end">
                 <button
                    onClick={() => setViewingTopic(null)}
-                   className="rounded-xl bg-slate-800 px-6 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-700"
+                   className="rounded-xl bg-slate-800 px-6 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-700 cursor-pointer"
                 >
                   Bağla
                 </button>
+              </div>
               </div>
            </div>
         </div>
@@ -558,11 +879,16 @@ export default function Home() {
 
       {/* Active Recall Modal */}
       {isShuffleOpen && randomTopic && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-           <div className="relative w-full max-w-sm animate-in zoom-in-95 duration-300 flex flex-col items-center text-center rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-slate-900 to-slate-950 p-8 shadow-2xl shadow-indigo-500/10">
+        <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            onClick={(e) => {
+                if (e.target === e.currentTarget) setIsShuffleOpen(false);
+            }}
+        >
+           <div className="relative w-full max-w-sm animate-in zoom-in-95 duration-300 flex flex-col items-center text-center rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-slate-900 to-slate-950 p-8 shadow-2xl shadow-indigo-500/10 cursor-default">
               <button
                 onClick={() => setIsShuffleOpen(false)}
-                className="absolute right-4 top-4 rounded-full p-2 text-slate-500 hover:bg-slate-900 hover:text-slate-300"
+                className="absolute right-4 top-4 rounded-full p-2 text-slate-500 hover:bg-slate-900 hover:text-slate-300 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -601,7 +927,7 @@ export default function Home() {
               
               <button
                  onClick={() => handleShuffle()}
-                 className="w-full rounded-xl bg-indigo-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
+                 className="w-full rounded-xl bg-indigo-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-500 cursor-pointer"
               >
                 Başqasını göstər
               </button>
@@ -611,13 +937,18 @@ export default function Home() {
 
       {/* Settings Modal */}
       {isSettingsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-200 rounded-2xl border border-slate-800 bg-slate-950 p-6 shadow-2xl">
+        <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            onClick={(e) => {
+                if (e.target === e.currentTarget) setIsSettingsOpen(false);
+            }}
+        >
+          <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-200 rounded-2xl border border-slate-800 bg-slate-950 p-6 shadow-2xl cursor-default">
             <div className="mb-6 flex items-center justify-between">
               <h3 className="text-lg font-semibold text-slate-100">Məlumat Tənzimləmələri</h3>
               <button
                 onClick={() => setIsSettingsOpen(false)}
-                className="rounded-full p-1 text-slate-500 hover:bg-slate-900 hover:text-slate-300"
+                className="rounded-full p-1 text-slate-500 hover:bg-slate-900 hover:text-slate-300 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -633,7 +964,7 @@ export default function Home() {
                   </p>
                   <button
                     onClick={handleExport}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600/10 py-2.5 text-sm font-medium text-indigo-400 transition-colors hover:bg-indigo-600/20"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600/10 py-2.5 text-sm font-medium text-indigo-400 transition-colors hover:bg-indigo-600/20 cursor-pointer"
                   >
                     {showCopied ? (
                       <>
@@ -666,7 +997,10 @@ export default function Home() {
                   </p>
                   <textarea
                     value={importData}
-                    onChange={(e) => setImportData(e.target.value)}
+                    onChange={(e) => {
+                        setImportData(e.target.value);
+                        setImportError('');
+                    }}
                     placeholder='Məsələn: [{"id":"1", "title":"..."}]'
                     rows={3}
                     className="mb-3 w-full resize-none rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-xs text-slate-300 placeholder-slate-600 focus:border-indigo-500 focus:outline-none"
@@ -689,8 +1023,13 @@ export default function Home() {
       )}
       {/* SOS Modal */}
       {isSOSOpen && sosTopic && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center bg-rose-950/90 p-4 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-md rounded-3xl bg-slate-900 border-2 border-rose-500 p-8 shadow-2xl relative">
+        <div 
+             className="fixed inset-0 z-[150] flex items-center justify-center bg-rose-950/90 p-4 backdrop-blur-sm animate-in fade-in duration-200"
+             onClick={(e) => {
+                 if (e.target === e.currentTarget) setIsSOSOpen(false);
+             }}
+           >
+          <div className="w-full max-w-md rounded-3xl bg-slate-900 border-2 border-rose-500 p-8 shadow-2xl relative cursor-default">
              <button 
                 onClick={() => setIsSOSOpen(false)}
                 className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white"
@@ -711,8 +1050,17 @@ export default function Home() {
                      </p>
                  </div>
                  
-                 <div className="text-sm text-slate-500">
-                     Mövzu: <span className="font-semibold text-slate-300">{sosTopic.title}</span>
+                 <div className="text-sm text-slate-500 flex items-center justify-center gap-1">
+                     Mövzu: 
+                     <button 
+                        onClick={() => {
+                            setIsSOSOpen(false);
+                            setViewingTopic(sosTopic);
+                        }}
+                        className="font-semibold text-slate-300 hover:text-white hover:underline decoration-slate-400 underline-offset-4 transition-all cursor-pointer"
+                     >
+                        {sosTopic.title}
+                     </button>
                  </div>
                  
                  <button

@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>İnsan tipləri və filosof arxetiplər - ChatGPT</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="286b8bfb-6e5c-80e0-a411-d83788605628" class="page sans"><header><h1 class="page-title" dir="auto">İnsan tipləri və filosof arxetiplər - ChatGPT</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-801a-b62d-d077aefe2895" class="">
+</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8052-9542-c2c265013e63" class="">İnsan tiplərini 5 filosof formatında kateqoriyalara ayırsan, bunların adları və özəllikləri nə olardı?</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-806b-b692-de5c87cb16ef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80d8-ae95-fdad950f36e6" class="">Əla sualdır, Xəyal. Gəlin maraqlı bir təfəkkür oyunu quraq — “<strong>insan tipləri</strong>”ni <strong>filosof formatında</strong>, yəni hər biri fərqli düşüncə tərzini, dəyərləri və dünyagörüşünü təmsil edən 5 fəlsəfi arxetip kimi təqdim edək. Bu həm fəlsəfi, həm də psixoloji baxımdan çox simvolik bir bölgü olacaq.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8088-8c3d-e8ef10714ddf"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-800e-b0de-e268b622df21" class="">🜂 <strong>1. Aristotel tipi — “Məntiqi realist”</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80f2-b78a-f190d9317a2d" class=""><strong>Düşüncə tərzi:</strong> balans, səbəb-nəticə, orta yol.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8023-bb09-c7a822bc8446" class=""><strong>Motto:</strong> “Hər şeyin bir səbəbi var.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8078-8c3d-d471df7ce8ed" class=""><strong>Xüsusiyyətlər:</strong></p></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-80a2-a34b-f141eca8f821" class="bulleted-list"><li style="list-style-type:disc">Analitik düşünür, hər qərarını dəlillərlə əsaslandırmağa çalışır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-802d-8bdd-d97d70ce4a4f" class="bulleted-list"><li style="list-style-type:disc">Duyğularını idarə etməyi bacarır, ifrata varmır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8087-9660-da568725c2fc" class="bulleted-list"><li style="list-style-type:disc">Sistemli, nizamlı və realistdir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8024-9289-f4629462377c" class="bulleted-list"><li style="list-style-type:disc">Həyatda məqsəd və funksiya axtarır (“teleoloji baxış”).</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8068-a83a-f77688c18916" class="bulleted-list"><li style="list-style-type:disc">Çox vaxt lider və ya müəllim tipidir.</li></ul></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80a6-be36-facfa4ad3d92" class=""><strong>Zəif tərəfi:</strong> Həddən artıq rasional olduğu üçün emosional dərinliyi bəzən gözdən qaçırır.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-800a-a029-e84fd46d5910"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-803b-a051-fbec76d49043" class="">🜃 <strong>2. Nietzsche tipi — “Üsyankar yaradıcı”</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-807e-9847-f44a5785517b" class=""><strong>Düşüncə tərzi:</strong> fərdi azadlıq, güc iradəsi, öz mənliyini yaratmaq.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80bd-ac55-c9eff9194e2e" class=""><strong>Motto:</strong> “Sən kim olmaq istəyirsənsə, o ol.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-804b-bf08-ea26614a3e4b" class=""><strong>Xüsusiyyətlər:</strong></p></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8069-8b7d-c08e03772fbb" class="bulleted-list"><li style="list-style-type:disc">Avtoritetə və cəmiyyət qaydalarına qarşı çıxır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8070-83d2-c8c4cef43665" class="bulleted-list"><li style="list-style-type:disc">Orijinal düşünür, stereotipləri sındırır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-803f-be27-f6e0718477b9" class="bulleted-list"><li style="list-style-type:disc">Güclü individualizm və azadlıq hissi daşıyır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-806a-a791-caab35fe65fe" class="bulleted-list"><li style="list-style-type:disc">Sənətdə, ideyalarda, həyat tərzində fərqlilik axtarır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8094-9a1c-dda66971ae2b" class="bulleted-list"><li style="list-style-type:disc">Hər şeydə mənanı özü yaradır.</li></ul></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8080-ac8d-eeef14e1f3e3" class=""><strong>Zəif tərəfi:</strong> Tənha qalmaqdan və anlaşılmamadan əziyyət çəkə bilər.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8070-a4d7-ed06a3d78053"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-80a2-9ac3-d8d93864d0f7" class="">🜁 <strong>3. Kant tipi — “Moral dəyərlər keşikçisi”</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8029-8151-c5e5f3d2ffe1" class=""><strong>Düşüncə tərzi:</strong> əxlaq, prinsip, vəzifə.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8082-b1de-f6327d10ecc2" class=""><strong>Motto:</strong> “Niyyətin təmizdirsə, yol doğrudur.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80c2-b96a-e9f64da777fb" class=""><strong>Xüsusiyyətlər:</strong></p></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8017-af7e-cecb3ed94fdb" class="bulleted-list"><li style="list-style-type:disc">Hər şeyi “doğru” və “yanlış” prizmasından dəyərləndirir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8083-8418-d712e4e5a739" class="bulleted-list"><li style="list-style-type:disc">Vicdanla idarə olunur, məsuliyyət hissi güclüdür.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-80be-b403-ed17ba1e3224" class="bulleted-list"><li style="list-style-type:disc">Sabit, ardıcıl, qaydalı insandır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-801a-b08c-d7329b2e3af5" class="bulleted-list"><li style="list-style-type:disc">Sosial ədalət, etik davranış onun üçün əsasdır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-804c-8bba-f472c9f70c7d" class="bulleted-list"><li style="list-style-type:disc">Çox vaxt başqalarının rifahını özündən üstün tutur.</li></ul></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-807f-b3a9-df2d6529c7e7" class=""><strong>Zəif tərəfi:</strong> Həddindən artıq prinsipiallıq emosional elastikliyi azaldır.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-806e-9975-c10c40848c07"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-80e9-bd28-c1b88a18762b" class="">🜄 <strong>4. Sartre tipi — “Varoluşçu azad ruh”</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8068-b862-c373f3b40187" class=""><strong>Düşüncə tərzi:</strong> mənasızlığa qarşı azad seçim.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-803e-bbe7-fe58b734a19a" class=""><strong>Motto:</strong> “İnsanı onun seçimi müəyyənləşdirir.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8020-bffa-cbeafb87578d" class=""><strong>Xüsusiyyətlər:</strong></p></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-800e-b8bb-f0279c13a1fa" class="bulleted-list"><li style="list-style-type:disc">Həyatda mənanı özü yaradır, hazır cavab gözləmir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8004-92c8-d33075213dcc" class="bulleted-list"><li style="list-style-type:disc">Qorxularına baxmayaraq, seçim etməyi vacib sayır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-80b5-abc2-f43cdbbfe8ff" class="bulleted-list"><li style="list-style-type:disc">Dərin düşüncəli, bəzən melankolik olur.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-807b-9b59-c9a076858de1" class="bulleted-list"><li style="list-style-type:disc">Öz daxili dünyasına çəkilib analiz aparmağı sevir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8014-bd83-d8525a3303ac" class="bulleted-list"><li style="list-style-type:disc">“Həyat mənasızdır, amma mən ona mənanı özüm verəcəyəm” düşüncəsini daşıyır.</li></ul></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80ce-8dd8-de24f3fbc4be" class=""><strong>Zəif tərəfi:</strong> Daimi daxili boşluq və varoluş narahatlığı yaşayır.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-80f9-acf4-e89aa7465b4b"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-804b-9a58-e1151893f0b6" class="">🜏 <strong>5. Lao Tzu tipi — “Təbiət axını ilə gedən müdrik”</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8096-aa5f-c477f7b1acda" class=""><strong>Düşüncə tərzi:</strong> harmoniya, axıcılıq, daxili sakitlik.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-800d-ae54-d6f7d068d254" class=""><strong>Motto:</strong> “Axına qarşı yox, axınla bir ol.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8014-a3ac-c36b015a9407" class=""><strong>Xüsusiyyətlər:</strong></p></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8078-9aa9-e0a07ae7fe28" class="bulleted-list"><li style="list-style-type:disc">Həyatı axış kimi görür, hadisələrə müqavimət göstərmir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8016-a1ec-fc0eccfaee2f" class="bulleted-list"><li style="list-style-type:disc">Sakit, dərin və müşahidəçidir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-804f-917f-cf1e9dd264bf" class="bulleted-list"><li style="list-style-type:disc">Ruhani dəyərlərə və təbiətə bağlıdır.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-804a-92da-e20c8a483226" class="bulleted-list"><li style="list-style-type:disc">Özünü və başqalarını olduğu kimi qəbul edir.</li></ul></div><div style="display:contents" dir="auto"><ul id="286b8bfb-6e5c-8011-87b7-fe856df3adfa" class="bulleted-list"><li style="list-style-type:disc">İnsanların arasındakı harmoniya və balansı qorumağa çalışır.</li></ul></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8084-ac43-ea9edc1ce773" class=""><strong>Zəif tərəfi:</strong> Həddindən artıq passiv və “qoy getsin” yanaşması ilə bəzən fürsətləri qaçıra bilər.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-80f7-a1a1-eebd95e6925f"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-804a-aaa2-c796774ad050" class="">🔶 Ümumi xülasə:</h3></div><div style="display:contents" dir="ltr"><table id="286b8bfb-6e5c-8000-8916-c36676b7212a" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-80a8-90d2-cd5d99c903d0"><th id="g=tt" class="simple-table-header-color simple-table-header">Tip</th><th id="XvNV" class="simple-table-header-color simple-table-header">Fəlsəfi təməl</th><th id="QDHt" class="simple-table-header-color simple-table-header">Güclü tərəf</th><th id="D\Fp" class="simple-table-header-color simple-table-header">Zəif tərəf</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-80af-95aa-f7466f26e1f1"><td id="g=tt" class="">Aristotel</td><td id="XvNV" class="">Məntiq və balans</td><td id="QDHt" class="">Rasional liderlik</td><td id="D\Fp" class="">Emosional soyuqluq</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-80a0-9e6d-dcd3053418c7"><td id="g=tt" class="">Nietzsche</td><td id="XvNV" class="">Azadlıq və yaradıcılıq</td><td id="QDHt" class="">Orijinallıq və iradə</td><td id="D\Fp" class="">Tənha üsyan</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-80bd-bc9b-d8120521a69a"><td id="g=tt" class="">Kant</td><td id="XvNV" class="">Əxlaq və prinsip</td><td id="QDHt" class="">Etik sabitlik</td><td id="D\Fp" class="">Elastikliyin azlığı</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-8077-b9ae-f1de6c4bb30a"><td id="g=tt" class="">Sartre</td><td id="XvNV" class="">Varoluş və seçim</td><td id="QDHt" class="">Dərinlik və fərdi məsuliyyət</td><td id="D\Fp" class="">Boşluq hissi</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-8036-9b3b-cdb4805c4ade"><td id="g=tt" class="">Lao Tzu</td><td id="XvNV" class="">Harmoniya və sadəlik</td><td id="QDHt" class="">Daxili sakitlik</td><td id="D\Fp" class="">Passivlik</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-80d5-9999-f440332f3074"/></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80df-a737-ecae3542e497" class="">İstəsən, bu 5 tipləri <strong>müasir insan davranış modellərinə (məsələn, lider, yaradıcı, realist, idealist, zen tipi)</strong> uyğunlaşdırıb vizual bir diaqram və ya &quot;test&quot; kimi də qura bilərik (məsələn, “sən hansı filosof tipisən?” test formatında).</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80ee-8477-c016707598a3" class="">Belə bir şey istəyirsənmi?</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80a2-b5f6-eed3c0f9b4c9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-807e-a6f9-f7a97bb5ccec" class="">İnsanları tanımaq məqsədiylə arxetiplərə bölüb, sonra lazım olduqda bu arxetipləri yada salaraq müxtəlif sahələrdə (məsələn, satış etməyə çalışarkən, münasibətlərdə və sair) işlətmək istəyirəm</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80a2-80cd-c9db60aa856d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80d2-8341-f3817d9b1561" class="">Mükəmməl yanaşmadır, Xəyal 🔥</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80a9-bc50-f901ce2b211f" class="">Bu, əslində <strong>praktik fəlsəfə + psixoloji strategiya</strong> qarışığıdır — yəni insanları dərin səviyyədə anlamaq üçün <strong>arxetiplər</strong> yaradırsan, sonra isə bu anlayışı <strong>ünsiyyət, liderlik, satış, motivasiya və münasibətlərdə</strong> tətbiq edirsən.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-807e-895d-fee5b148e97b" class="">Sənin məqsədinə uyğun olaraq, indi sənə <strong>universal, tətbiq oluna bilən 5 arxetip sistemi</strong> quracam — fəlsəfi əsaslı, amma <strong>praktiki</strong> işlək formatda.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8081-ab49-e5dc47abb3e1"/></div><div style="display:contents" dir="auto"><h2 id="286b8bfb-6e5c-8079-ac5f-f833471d5a4f" class="">🧭 “İnsanı tanımaq üçün 5 fəlsəfi arxetip”</h2></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-804a-a03d-c301c09a9918" class=""><em>(hər biri həm düşüncə tərzini, həm davranış modelini, həm də manipulyasiya/ünsiyyət açarını göstərir)</em></p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8046-ad8e-cae4ac411630"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-8001-86d7-c03379b05f23" class="">⚙️ <strong>1. Analitik (Aristotel tipi)</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-804c-9f07-f346f9015802" class=""><strong>Fəlsəfi kök:</strong> Aristotel / Realizm</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-804a-822c-d65ffe5cb2de" class=""><strong>Düşünür:</strong> “Hər şeyin məntiqi və qaydası var.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8054-b692-c3f114f4635f" class=""><strong>Motivasiya mənbəyi:</strong> Qətiyyət, məntiq, struktur.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80af-a2f7-ec53d171e315" class=""><strong>Ünsiyyət açarı:</strong> Faktlarla danış, plan təqdim et.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80e6-9e1c-d458a476c6e3" class=""><strong>Satış zamanı:</strong> Onu inandırmaq üçün <strong>dəlil</strong>, <strong>təcrübə</strong>, <strong>sabit nəticə</strong> göstər.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80cd-9d20-c9a6b48a0578" class=""><strong>Münasibətdə:</strong> Sakit, sistemli, dürüst yanaşmanı bəyənir — xaos və emosional təzyiqdən uzaq dur.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80d0-bf64-f541aa78a12a" class=""><strong>Zəif tərəf:</strong> Duyğulara və spontanlığa az yer verir.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-805d-8899-dc7d61b91247" class="">🧩 <strong>Tanımaq üçün ipucu:</strong> Dəqiq suallar verir, qeydlər aparır, &quot;nə üçün belə?&quot; deyə soruşur.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8087-8973-e321dd6a79fd"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-80f9-a96d-de04c22cba03" class="">🔥 <strong>2. Yaradan (Nietzsche tipi)</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8013-a14e-c242903aaf72" class=""><strong>Fəlsəfi kök:</strong> Nietzsche / Ekspressionizm</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80cb-ba6d-d1073ad931eb" class=""><strong>Düşünür:</strong> “Mən öz qaydalarımı özüm yazıram.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8099-ae01-f8f4daccc630" class=""><strong>Motivasiya mənbəyi:</strong> Azadlıq, fərqlilik, özünüifadə.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80d9-8af7-e521062d6823" class=""><strong>Ünsiyyət açarı:</strong> Onun azad ruhunu <strong>qısıtlama</strong>, ideyalarına <strong>hörmət et</strong>.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-800a-a721-e60c68a35463" class=""><strong>Satış zamanı:</strong> Ona <strong>fərqlilik</strong>, <strong>potensial</strong>, <strong>orijinallıq</strong> və <strong>imkan</strong> sat. (“Bu sənə bənzərsiz bir imic verəcək.”)</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80e4-a6ac-ff52605101f9" class=""><strong>Münasibətdə:</strong> Qəliblərdən uzaq, dərin və emosional bağ istəyə bilər, amma tez darıxar.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-805f-b745-e668350c73eb" class=""><strong>Zəif tərəf:</strong> Ego və qərarsızlıq.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80e9-a398-cbcc634a9d84" class="">🧩 <strong>Tanımaq üçün ipucu:</strong> “Hər kəs eyni şey edir, mən fərqli düşünürəm” tipli ifadələrdən tanınır.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8066-9de9-d5d46a7b9fe7"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-80c0-ba5c-d7c3881c8c59" class="">⚖️ <strong>3. Prinsipial (Kant tipi)</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8021-9963-f5b8e99e7d35" class=""><strong>Fəlsəfi kök:</strong> Kant / Deontologiya</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80ae-a36a-e3092dca6cd1" class=""><strong>Düşünür:</strong> “Doğru olanı etmək borcumdur.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8081-8ef0-c0c6799011a2" class=""><strong>Motivasiya mənbəyi:</strong> Əxlaq, dəyərlər, məsuliyyət.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-803a-9cd2-fd5947759382" class=""><strong>Ünsiyyət açarı:</strong> Ona <strong>dürüstlük</strong>, <strong>etibarlılıq</strong> və <strong>ədalət</strong> göstəriciləri ilə yanaş.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8002-a4a2-c4363a217bba" class=""><strong>Satış zamanı:</strong> Onun dəyərlərinə uyğun təqdim et (“Bu məhsul uzunmüddətli fayda gətirəcək, insanlara da xeyir verir.”)</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-803f-9ed5-cf4f3770ffa4" class=""><strong>Münasibətdə:</strong> Sabit, etibarlı, dərin sədaqətlidir — lakin dəyişikliklərə çətin uyğunlaşır.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8070-a3ac-ca453a7b07e6" class=""><strong>Zəif tərəf:</strong> Elastikliyin azlığı, dogmatizmə meyl.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80a9-829a-d99830d70965" class="">🧩 <strong>Tanımaq üçün ipucu:</strong> “Əsas məsələ vicdandır”, “düzgün olanı etmək lazımdır” kimi ifadələrdən istifadə edir.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-80d5-9805-c477a05f0aba"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-80a8-b0e0-c481feb6401d" class="">🌌 <strong>4. Varoluşçu (Sartre tipi)</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80cd-a241-f85e060519f6" class=""><strong>Fəlsəfi kök:</strong> Sartre / Ekzistensializm</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-806c-a4fb-f56e86b11a67" class=""><strong>Düşünür:</strong> “Mən kim olduğumu öz seçimimlə müəyyən edirəm.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-800b-a405-e811a615df66" class=""><strong>Motivasiya mənbəyi:</strong> Mənanın axtarışı, fərdi azadlıq.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80f9-a858-f995e11a37c4" class=""><strong>Ünsiyyət açarı:</strong> Onunla <strong>dərin, səmimi</strong>, “həyatın mənası” tipli söhbətlər qur.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80dc-9358-dc7a2a41478f" class=""><strong>Satış zamanı:</strong> Məhsulu onun <strong>mənasına</strong> bağla (“Bu sənə öz yolunu tapmağa kömək edəcək.”)</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-807e-91ce-decdf7ed98a5" class=""><strong>Münasibətdə:</strong> Səmimiyyət və intellektual yaxınlıq axtarır; emosional dərinliyi vacib sayır.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80ef-9bfa-d98bdcdc30ae" class=""><strong>Zəif tərəf:</strong> Daxili narahatlıq və qərarsızlıq.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8078-b7e1-e763d47f9f80" class="">🧩 <strong>Tanımaq üçün ipucu:</strong> Həyat, mənalı yaşamaq, seçim və azadlıq mövzularında danışmağı sevir.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-80b3-83f9-f99d37b0ae9a"/></div><div style="display:contents" dir="auto"><h3 id="286b8bfb-6e5c-8021-9010-fd96c92daf9a" class="">🌿 <strong>5. Axın adamı (Lao Tzu tipi)</strong></h3></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8098-8e0d-c06f46654c56" class=""><strong>Fəlsəfi kök:</strong> Taoizm / Zen</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80d2-b2ab-f3bd537c8802" class=""><strong>Düşünür:</strong> “Həyat axındır, müqavimət göstərmə.”</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8026-825d-ca83de27102b" class=""><strong>Motivasiya mənbəyi:</strong> Daxili harmoniya və sakitlik.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8096-8cd1-dafde3993ea6" class=""><strong>Ünsiyyət açarı:</strong> Ona <strong>sakit, təzyiqsiz</strong>, “rahatlıq və sadəlik” tonunda yaxınlaş.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8062-81f7-c7b928f67f3e" class=""><strong>Satış zamanı:</strong> Ona <strong>stressi azaldan</strong>, <strong>rahatlıq verən</strong>, <strong>sadə</strong> həll təklif et. (“Bu sənə enerjini balanslaşdırmağa kömək edəcək.”)</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8090-b5cc-cbff5e178ca9" class=""><strong>Münasibətdə:</strong> Axıcı, təzyiqsiz, rahat münasibət istəyir. Drama və tələsiklikdən qaçır.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-80fc-86a9-f56dd605f905" class=""><strong>Zəif tərəf:</strong> Passivlik, qərarsızlıq, “hər şey öz yoluyla olar” düşüncəsinə həddən artıq güvən.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-807f-87db-cd43a1090d68" class="">🧩 <strong>Tanımaq üçün ipucu:</strong> “Narahat olma, hər şey düzələr”, “axar su yolunu tapar” kimi sakitləşdirici cümlələrdən istifadə edir.</p></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-80f4-bd22-e80826a4eac9"/></div><div style="display:contents" dir="auto"><h2 id="286b8bfb-6e5c-80f6-b830-f8ca3a4eb2e0" class="">💡 Arxetiplərin tətbiq üsulu:</h2></div><div style="display:contents" dir="ltr"><table id="286b8bfb-6e5c-8044-bfcf-c0d5599d1098" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-80ea-8e44-f92afcebbab1"><th id="BF@V" class="simple-table-header-color simple-table-header">Sahə</th><th id="vwGt" class="simple-table-header-color simple-table-header">Necə işlətmək olar</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-8044-8854-dc5f25838b4d"><td id="BF@V" class=""><strong>Satış</strong></td><td id="vwGt" class="">Müştərinin danışıq tonuna, dəyərlərinə bax. Analitik fakt istəyir, Yaradan fərqlilik istəyir, Prinsipial ədalət istəyir, Varoluşçu məna istəyir, Axın adamı rahatlıq istəyir.</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-803c-894f-e78fb4b35e6d"><td id="BF@V" class=""><strong>Münasibətlər</strong></td><td id="vwGt" class="">Qarşındakı insanın hansı tipə aid olduğunu tanı — Yaradanla azadlıq, Prinsipialla sabitlik, Axın adamı ilə sakitlik qur.</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-807f-96c1-d155873aa765"><td id="BF@V" class=""><strong>Liderlik</strong></td><td id="vwGt" class="">Komanda üzvlərini bu tiplərə görə motivasiya et: kim struktur istəyir, kim sərbəstlik, kim mənəvi dəyər.</td></tr></div><div style="display:contents" dir="ltr"><tr id="286b8bfb-6e5c-80be-bdd6-d4e4b859790b"><td id="BF@V" class=""><strong>Psixologiya / Özünü tanıma</strong></td><td id="vwGt" class="">Öz tipini bilmək — hansı vəziyyətdə nəyi niyə hiss etdiyini anlamağa kömək edir.</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="286b8bfb-6e5c-8079-b8b7-fed191440965"/></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-805f-945a-ceef614f28c5" class="">İstəsən, bu arxetipləri <strong>vizual diaqram</strong> (məsələn, 5 dairə — düşüncə mərkəzləri) və ya <strong>praktik test</strong> kimi (hər tip üçün 5-7 sual) formalaşdıraq, sənin “insan tanıma alətinə” çevrilsin.</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8026-afdc-f0c15615f7fc" class="">Belə bir <strong>test + profil sistemi</strong> istərsənmi?</p></div><div style="display:contents" dir="auto"><p id="286b8bfb-6e5c-8092-a675-d707c590feb3" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

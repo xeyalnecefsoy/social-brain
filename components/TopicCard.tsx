@@ -1,6 +1,6 @@
 import { Topic } from '@/data/inspiration';
 import { cn } from '@/lib/utils';
-import { Trash2, Copy, Plus, Quote, Sparkles, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent } from 'lucide-react';
+import { Trash2, Copy, Plus, Quote, Sparkles, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent, Clapperboard, Smile } from 'lucide-react';
 
 interface TopicCardProps {
   topic: Topic;
@@ -17,7 +17,7 @@ export function TopicCard({ topic, onDelete, onAdd, onClick, variant = 'personal
       if (['Elm', 'Texnologiya', 'Kosmos'].includes(category)) return 'from-indigo-500 to-purple-500';
       if (['Tarix', 'Fəlsəfə', 'Siyasət'].includes(category)) return 'from-amber-500 to-orange-500';
       if (['Təbiət', 'Sağlamlıq', 'Psixologiya'].includes(category)) return 'from-emerald-500 to-teal-500';
-      if (['İncəsənət', 'İdman', 'Gülməli'].includes(category)) return 'from-rose-500 to-pink-500';
+      if (['İncəsənət', 'İdman', 'Gülməli', 'Filmlər/Seriallar'].includes(category)) return 'from-rose-500 to-pink-500';
       return 'from-slate-500 to-slate-400';
   };
 
@@ -34,7 +34,9 @@ export function TopicCard({ topic, onDelete, onAdd, onClick, variant = 'personal
     'Kosmos': Rocket,
     'Fəlsəfə': BookOpen,
     'Sağlamlıq': HeartPulse,
-    'İdman': Trophy
+    'İdman': Trophy,
+    'Filmlər/Seriallar': Clapperboard,
+    'Gülməli': Smile
   };
   
   const gradient = getGradient(topic.category);
@@ -106,9 +108,13 @@ export function TopicCard({ topic, onDelete, onAdd, onClick, variant = 'personal
         {/* Footer: Vibe & Source */}
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-800/50 pt-4">
              {topic.source && (
-                 <div className="flex items-center gap-1 text-[10px] uppercase font-bold text-slate-600">
-                     <Quote size={10} />
-                     {topic.source.split(' ')[0]} {/* Qısa Mənbə */}
+                 <div className="flex items-center gap-1 text-[10px] uppercase font-bold text-slate-600 max-w-[60%]">
+                     <Quote size={10} className="shrink-0" />
+                     <span className="truncate">
+                       {topic.source.startsWith('http') 
+                           ? new URL(topic.source).hostname.replace('www.', '') 
+                           : topic.source}
+                     </span>
                  </div>
              )}
              
