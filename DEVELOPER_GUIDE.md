@@ -30,5 +30,31 @@ Bu fayl layihə üzərində işləyərkən qarşılaşılan texniki çətinlikl�
 ## 5. İkonlar və Dizayn
 - Kateqoriyalar üçün `lucide-react` ikonları (Atom, History, Tent və s.) xüsusi `Record` obyektində saxlanılır. Yeni kateqoriya əlavə edərkən bu siyahıya ikon əlavə etməyi unutmayın.
 
+
 ---
-*Son Yenilənmə: 10 Yanvar 2026*
+
+## 6. Son Sessiya Qeydləri (11 Yanvar 2026)
+
+### URL Oxuma Xətaları (403 Forbidden)
+**Problem:** `read_url_content` aləti bəzi saytlarda (məs: `eksiseyler.com`, `wikipedia.org`) "403 Forbidden" xətası verir və məzmunu oxuya bilmir. Bu, saytların bot qoruması ilə əlaqəlidir.
+**Həll/Yanaşma:** 
+- Belə hallarda istifadəçinin verdiyi qısa məlumat (başlıq və ya təsvir) əsasında yaradıcı təxəyyüldən istifadə edərək playlist yaratmaq lazımdır.
+- Alət xəta versə belə, dayanmaq lazım deyil; alternativ məlumat mənbəyi (istifadəçinin yazdığı) istifadə edilməlidir.
+
+### Yeni UI Komponentləri: Searchable Dropdown
+**Yenilik:** Mobil versiyada yerə qənaət etmək üçün üfüqi sürüşdürmə (horizontal scroll) filtrləri **Axtarış edilə bilən Dropdown** (Searchable Dropdown) ilə əvəz edildi.
+**Qeyd:** Bu komponent üçün `app/page.tsx` daxilində aşağıdakı `state`-lər idarə olunur:
+- `isFilterCatOpen` / `isFilterVibeOpen`: Açılıb-bağlanma statusu.
+- `filterCatSearch` / `filterVibeSearch`: Dropdown daxilindəki axtarış mətni.
+
+### Yeni Kateqoriya Əlavə Etmə Çeklisti
+Tətbiqə yeni kateqoriya (məs: 'Filmlər/Seriallar', 'Gülməli') əlavə edərkən 3 yerdə dəyişiklik edilməlidir:
+1.  **`app/page.tsx` -> `categoryIcons`**: Yeni ikonu `lucide-react`-dan import edib bura əlavə etmək.
+2.  **`app/page.tsx` -> `categories`**: Siyahıya kateqoriyanın adını əlavə etmək.
+3.  **`components/TopicCard.tsx` -> `getGradient`**: Yeni kateqoriyanın hansı rəng qrupuna aid olacağını təyin etmək (məs: *red/rose* qrupu).
+
+### İş Axını (Workflow) Effektivliyi
+`/playlist` iş axını çox uğurlu işləyir. İstifadəçi link və ya mövzu atır, agent bunu analiz edib dərhal 3 hissəli struktura (Topic, Vibe, Opening Question) çevirir. Bu standartlaşdırma prosesi sürətləndirir.
+
+---
+*Son Yenilənmə: 11 Yanvar 2026*
