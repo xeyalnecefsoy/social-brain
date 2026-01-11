@@ -224,8 +224,20 @@ export default function Home() {
   };
 
   const handleShuffle = () => {
-    // Əgər şəxsi mövzu yoxdursa, inspirasiya faktlarından istifadə et
-    const source = myTopics.length > 0 ? myTopics : INSPIRATION_TOPICS;
+    // 1. Prioritet: Filtrlənmiş şəxsi mövzular
+    let source = filteredTopics;
+
+    // 2. Əgər şəxsi mövzularda nəticə yoxdursa, filtrlənmiş inspirasiya faktlarına bax
+    if (source.length === 0) {
+      source = filteredInspiration;
+    }
+
+    // 3. Əgər heç bir nəticə yoxdursa
+    if (source.length === 0) {
+      alert("Seçilmiş filtrlərə uyğun mövzu tapılmadı! Zəhmət olmasa filtrləri dəyişin.");
+      return;
+    }
+
     const random = source[Math.floor(Math.random() * source.length)];
     setRandomTopic(random);
     setIsShuffleOpen(true);

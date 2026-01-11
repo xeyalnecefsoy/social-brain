@@ -56,5 +56,8 @@ Tətbiqə yeni kateqoriya (məs: 'Filmlər/Seriallar', 'Gülməli') əlavə edə
 ### İş Axını (Workflow) Effektivliyi
 `/playlist` iş axını çox uğurlu işləyir. İstifadəçi link və ya mövzu atır, agent bunu analiz edib dərhal 3 hissəli struktura (Topic, Vibe, Opening Question) çevirir. Bu standartlaşdırma prosesi sürətləndirir.
 
+### Mənbə Linkləri
+**Qayda:** İstifadəçi hər hansı veb link təqdim etdikdə və həmin linkdən məlumat çıxarıb mövzu yaratdıqda, `Topic` strukturundakı `source` sahəsinə **tam URL-i (Full URL)** yazmaq mütləqdir. Məsələn: `source: 'BuzzFeed'` əvəzinə `source: 'https://buzzfeed.com/...'`. Bu, istifadəçinin sonradan mənbəyə keçid etməsini asanlaşdırır.
+
 ---
 *Son Yenilənmə: 11 Yanvar 2026*
