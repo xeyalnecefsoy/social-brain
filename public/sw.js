@@ -1,58 +1,154 @@
 // Service Worker for Social Brain PWA
 // Bu fayl offline funksionallığı təmin edir
 
-const CACHE_NAME = 'social-brain-v1';
-const STATIC_ASSETS = [
+const CACHE_NAME = 'social-brain-v2';
+const OFFLINE_URL = '/offline.html';
+
+// Quraşdırma zamanı cache ediləcək kritik fayllar
+const PRECACHE_ASSETS = [
   '/',
   '/manifest.json',
   '/icon.png',
   '/icon-512.png',
+  '/offline.html',
 ];
 
-// Service Worker quraşdırma zamanı statik faylları cache et
+// Install event - kritik faylları əvvəlcədən cache et
 self.addEventListener('install', (event) => {
+  console.log('[SW] Installing Service Worker...');
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Statik fayllar cache edilir');
-      return cache.addAll(STATIC_ASSETS);
-    })
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('[SW] Precaching app shell');
+        return cache.addAll(PRECACHE_ASSETS);
+      })
+      .then(() => {
+        console.log('[SW] Skip waiting on install');
+        return self.skipWaiting();
+      })
   );
-  // Dərhal aktivləş
-  self.skipWaiting();
 });
 
-// Köhnə cache-ləri təmizlə
+// Activate event - köhnə cache-ləri təmizlə
 self.addEventListener('activate', (event) => {
+  console.log('[SW] Activating Service Worker...');
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => {
-            console.log('[ServiceWorker] Köhnə cache silinir:', name);
-            return caches.delete(name);
-          })
-      );
-    })
+    caches.keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames
+            .filter((name) => name !== CACHE_NAME)
+            .map((name) => {
+              console.log('[SW] Deleting old cache:', name);
+              return caches.delete(name);
+            })
+        );
+      })
+      .then(() => {
+        console.log('[SW] Claiming clients');
+        return self.clients.claim();
+      })
   );
-  // Bütün client-ləri idarə et
-  self.clients.claim();
 });
 
-// Network First strategiyası - əvvəlcə network, əgər olmasa cache
+// Fetch event - sorğuları tutub cache et
 self.addEventListener('fetch', (event) => {
   const { request } = event;
+  const url = new URL(request.url);
 
-  // Yalnız GET sorğularını cache et
+  // Yalnız GET sorğularını işlə
   if (request.method !== 'GET') return;
 
-  // Chrome extension və digər xarici sorğuları ignore et
-  if (!request.url.startsWith('http')) return;
+  // Xarici domenləri ignore et (API-lər və s.)
+  if (url.origin !== self.location.origin) {
+    // Xarici resurslar üçün network-only
+    return;
+  }
 
+  // Next.js static assets üçün Cache First strategiyası
+  if (url.pathname.startsWith('/_next/static/')) {
+    event.respondWith(
+      caches.match(request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return fetch(request).then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // Next.js data chunks üçün
+  if (url.pathname.startsWith('/_next/')) {
+    event.respondWith(
+      caches.match(request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return fetch(request).then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return response;
+        }).catch(() => {
+          // _next resursu yoxdursa, cached-i qaytar
+          return cachedResponse || new Response('Resource not available offline', { status: 503 });
+        });
+      })
+    );
+    return;
+  }
+
+  // HTML səhifələri üçün Network First (fallback: cache)
+  if (request.destination === 'document' || request.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(request).then((cachedResponse) => {
+            if (cachedResponse) {
+              console.log('[SW] Serving cached page:', url.pathname);
+              return cachedResponse;
+            }
+            // Ana səhifəni göstər, yoxsa offline səhifə
+            return caches.match('/').then((homeResponse) => {
+              if (homeResponse) {
+                return homeResponse;
+              }
+              return caches.match(OFFLINE_URL);
+            });
+          });
+        })
+    );
+    return;
+  }
+
+  // Digər statik resurslar üçün (images, fonts və s.)
   event.respondWith(
-    fetch(request)
-      .then((response) => {
-        // Uğurlu cavab - cache-ə əlavə et
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(request).then((response) => {
         if (response.ok) {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
@@ -60,28 +156,18 @@ self.addEventListener('fetch', (event) => {
           });
         }
         return response;
-      })
-      .catch(() => {
-        // Network yoxdur - cache-dən götür
-        return caches.match(request).then((cachedResponse) => {
-          if (cachedResponse) {
-            console.log('[ServiceWorker] Cache-dən göstərilir:', request.url);
-            return cachedResponse;
-          }
-          
-          // Əgər ana səhifədirsə və cache-də yoxdursa, offline səhifə göstər
-          if (request.destination === 'document') {
-            return caches.match('/');
-          }
-          
-          return new Response('Offline - məzmun tapılmadı', {
-            status: 503,
-            statusText: 'Service Unavailable',
-            headers: new Headers({
-              'Content-Type': 'text/plain; charset=utf-8'
-            })
-          });
-        });
-      })
+      }).catch(() => {
+        // Resurs tapılmadı
+        return new Response('', { status: 404 });
+      });
+    })
   );
 });
+
+// Mesaj qəbul et (yeniləmə tələbi)
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
