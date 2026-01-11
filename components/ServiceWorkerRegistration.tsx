@@ -119,8 +119,8 @@ export function ServiceWorkerRegistration() {
         <div className="fixed top-0 left-0 right-0 z-[9999] bg-amber-500/90 text-amber-950 backdrop-blur-sm shadow-lg flex items-center justify-between px-4 py-2 text-sm font-medium animate-in slide-in-from-top duration-300">
            <div className="flex items-center gap-2">
              <span>📴</span>
-             <span className="text-xs truncate max-w-[250px] sm:max-w-none">
-               İnternetsiz rejim - Yalnız cache edilmiş məzmun
+             <span className="text-xs font-semibold">
+               Offline Rejim
              </span>
            </div>
            

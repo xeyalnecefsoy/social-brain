@@ -16,11 +16,19 @@ Bu fayl layihə üzərində işləyərkən qarşılaşılan texniki çətinlikl�
 - `package.json` faylında dev skripti sadəcə `next dev` olaraq saxlanılıb.
 - **Qayda:** Turbopack-i hələlik aktivləşdirməyin.
 
-## 3. Terminal və Git Əmrləri (Agent/Windows)
-**Problem:** Windows PowerShell mühitində zəncirvari əmrlər (`git add . && git commit...`) bəzən düzgün işləmir və ya xəta verəndə proses dayanmır.
+## 3. Terminal və Git Əmrləri (CRITICAL RULE)
+**Problem:** Agent mühitində və Windows PowerShell-də `&&` ilə zəncirlənmiş əmr strukturları (məs: `git add . && git commit...`) tez-tez uğursuz olur.
 **Həll:**
-- Git əmrlərini **bir-bir** və **ardıcıl** icra etmək ən etibarlı yoldur.
-- Eyni anda push, commit və remote əlavə etməyə çalışmayın.
+- **QAYDA:** Heç vaxt git əmrlərini zəncirləməyin (`&&` istifadə etməyin).
+- Hər git əmrini (`add`, `status`, `commit`, `push`) ayrı-ayrı `run_command` çağırışları ilə göndərin.
+- Bu, xətaların dəqiq hansı mərhələdə baş verdiyini görməyə imkan verir və "partial success" hallarının qarşısını alır.
+
+## 4. PWA və Offline Rejim (Deployment)
+**Problem:** Next.js App Router standart şəkildə dinamik server tələb edir, bu da sadə offline Service Worker-lərin (simple caching) işini çətinləşdirir.
+**Həll:**
+1.  **Static Export:** `next.config.ts` faylında `output: 'export'` təyin edin. Bu, layihəni serverdən asılı olmayan statik HTML-ə çevirir.
+2.  **Aqressiv Caching:** Service Worker-də "Stale-While-Revalidate" strategiyasından istifadə edin.
+3.  **Deploy:** Vercel-də deploy edərkən `yarn build` əmri `out` qovluğu yaradır. Static faylların düzgün xidmət edildiyindən əmin olun.
 
 ## 4. UI/UX "Gotchas" (Diqqət edilməli məqamlar)
 - **Mətn Formatlama:** Tətbiqdəki təsvirlər (description) sadə `string` kimi saxlanılır. `**qalın**` və ya `*kursiv*` yazıları render etmək üçün React daxilində xüsusi `split/map` funksiyası yazılıb. Sadəcə mətni ekrana basmaq (rendering text directly) formatı pozacaq.
