@@ -116,8 +116,23 @@ export function ServiceWorkerRegistration() {
     <>
       {/* Offline indicator */}
       {isOffline && (
-        <div className="fixed top-0 left-0 right-0 z-[9999] bg-amber-500 text-amber-950 text-center py-2 text-sm font-medium">
-          📴 İnternetsiz rejim - Yalnız cache edilmiş məzmun mövcuddur
+        <div className="fixed top-0 left-0 right-0 z-[9999] bg-amber-500/90 text-amber-950 backdrop-blur-sm shadow-lg flex items-center justify-between px-4 py-2 text-sm font-medium animate-in slide-in-from-top duration-300">
+           <div className="flex items-center gap-2">
+             <span>📴</span>
+             <span className="text-xs truncate max-w-[250px] sm:max-w-none">
+               İnternetsiz rejim - Yalnız cache edilmiş məzmun
+             </span>
+           </div>
+           
+           <button 
+             onClick={() => setIsOffline(false)}
+             className="ml-2 p-1 hover:bg-amber-600/20 rounded-full transition-colors"
+             aria-label="Bağla"
+           >
+             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+               <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+             </svg>
+           </button>
         </div>
       )}
 
