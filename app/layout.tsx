@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,9 @@ export default function RootLayout({
     <html lang="az" className="dark h-full">
       <body className={`${inter.className} h-full antialiased bg-slate-950 text-slate-50`}>
         {children}
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );
 }
+
