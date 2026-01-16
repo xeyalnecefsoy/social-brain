@@ -1,7 +1,7 @@
 // Social Brain PWA - Service Worker v3
 // Tam offline dəstəyi üçün aqressiv caching
 
-const CACHE_NAME = 'social-brain-v3';
+const CACHE_NAME = 'social-brain-v4';
 
 // Install - Service Worker quraşdırılır
 self.addEventListener('install', (event) => {
@@ -16,10 +16,8 @@ self.addEventListener('install', (event) => {
       // İlkin faylları cache et
       return cache.addAll([
         '/',
-        '/index.html',
         '/manifest.json',
-        '/icon.png',
-        '/icon-512.png',
+        '/icon.svg',
         '/offline.html'
       ]).catch(err => {
         console.warn('[SW] Bəzi fayllar cache edilə bilmədi:', err);

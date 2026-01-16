@@ -7,6 +7,8 @@ import { TopicCard } from '@/components/TopicCard';
 import { Plus, Search, Shuffle, X, Lightbulb, Quote, Settings, Copy, Check, Download, Upload, LayoutGrid, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent, Heart, Sparkles, MessageCircle, Shield, ArrowUpDown, Clapperboard, Smile } from 'lucide-react';
 import { clsx } from 'clsx';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { FormattedText } from '@/components/FormattedText';
 
 export default function Home() {
   // State
@@ -277,6 +279,14 @@ export default function Home() {
              >
                <Plus className="h-5 w-5" />
              </button>
+             <Link
+               href="/mindmap"
+               className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-900 hover:text-indigo-400"
+               aria-label="Beyin Xəritəsi"
+               title="Beyin Xəritəsi"
+             >
+                <Atom className="h-5 w-5" />
+             </Link>
              <button
               onClick={() => setIsSettingsOpen(true)}
               className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-900 hover:text-slate-200"
@@ -780,18 +790,10 @@ export default function Home() {
               </h3>
               
               <div className="prose prose-invert max-w-none text-slate-300">
-                <div className="text-base leading-relaxed md:text-lg text-slate-300">
-                  {viewingTopic.description.split(/(\*\*.*?\*\*)|(\*.*?\*)/g).map((part, index) => {
-                      if (!part) return null;
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                          return <strong key={index} className="font-bold text-white">{part.slice(2, -2)}</strong>;
-                      }
-                      if (part.startsWith('*') && part.endsWith('*')) {
-                          return <em key={index} className="italic text-indigo-300">{part.slice(1, -1)}</em>;
-                      }
-                      return <span key={index}>{part}</span>;
-                  })}
-                </div>
+                <FormattedText 
+                  text={viewingTopic.description} 
+                  className="text-base leading-relaxed md:text-lg text-slate-300" 
+                />
               </div>
 
               {viewingTopic.source && (

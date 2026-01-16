@@ -1,6 +1,7 @@
 import { Topic } from '@/data/inspiration';
 import { cn } from '@/lib/utils';
-import { Trash2, Copy, Plus, Quote, Sparkles, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent, Clapperboard, Smile } from 'lucide-react';
+import { Quote, Sparkles, Atom, History, Cpu, Landmark, Palette, Leaf, Brain, Rocket, BookOpen, HeartPulse, Trophy, Tent, Clapperboard, Smile, Trash2, Plus } from 'lucide-react';
+import { FormattedText } from './FormattedText';
 
 interface TopicCardProps {
   topic: Topic;
@@ -91,18 +92,10 @@ export function TopicCard({ topic, onDelete, onAdd, onClick, variant = 'personal
            <h3 className="mb-2 text-lg font-bold text-slate-100 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-400 transition-all">
              {topic.title}
            </h3>
-           <div className="line-clamp-3 text-sm leading-relaxed text-slate-400 group-hover:text-slate-300 transition-colors">
-             {topic.description.split(/(\*\*.*?\*\*)|(\*.*?\*)/g).map((part, index) => {
-                 if (!part) return null;
-                 if (part.startsWith('**') && part.endsWith('**')) {
-                     return <strong key={index} className="font-bold text-slate-200">{part.slice(2, -2)}</strong>;
-                 }
-                 if (part.startsWith('*') && part.endsWith('*')) {
-                     return <em key={index} className="italic text-indigo-400">{part.slice(1, -1)}</em>;
-                 }
-                 return <span key={index}>{part}</span>;
-             })}
-           </div>
+           <FormattedText 
+             text={topic.description} 
+             className="line-clamp-3 text-sm leading-relaxed text-slate-400 group-hover:text-slate-300 transition-colors" 
+           />
         </div>
 
         {/* Footer: Vibe & Source */}

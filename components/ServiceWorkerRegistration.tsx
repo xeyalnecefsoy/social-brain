@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 const RESOURCES_TO_CACHE = [
   '/',
   '/manifest.json',
-  '/icon.png',
-  '/icon-512.png',
+  '/icon.svg',
   '/offline.html',
 ];
 
@@ -182,7 +181,7 @@ async function warmCache() {
   try {
     console.log("[PWA] Cache isidilir...");
     
-    const cache = await caches.open('social-brain-v2');
+    const cache = await caches.open('social-brain-v4');
     
     // Kritik resursları cache et
     for (const url of RESOURCES_TO_CACHE) {
